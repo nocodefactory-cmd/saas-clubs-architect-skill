@@ -6464,3 +6464,164 @@ Every proposal involving Feature Flags should define:
 - cleanup plan
 
 Avoid introducing Feature Flags without a defined lifecycle.
+
+---
+
+# Playbook — Background Jobs & Queue Architecture
+
+Not every task belongs in the user request lifecycle.
+
+Background processing improves responsiveness, resilience and scalability.
+
+Move work to asynchronous execution only when business consistency allows it.
+
+---
+
+## Candidate Workloads
+
+Evaluate background execution for:
+
+- email delivery
+- push notifications
+- report generation
+- PDF generation
+- image processing
+- AI processing
+- external API synchronization
+- ranking recalculation
+- analytics
+- scheduled maintenance
+
+Avoid blocking user interactions with long-running operations.
+
+---
+
+## Synchronous vs Background
+
+Keep work synchronous when:
+
+- immediate business validation is required
+- transaction consistency depends on completion
+- user confirmation requires the final result
+
+Move work to background when:
+
+- execution is slow
+- retries are acceptable
+- external dependencies exist
+- eventual consistency is acceptable
+
+Business consistency always has priority over responsiveness.
+
+---
+
+## Job Design
+
+Every job should define:
+
+- unique identifier
+- business purpose
+- inputs
+- expected outputs
+- timeout
+- retry policy
+- owner
+
+Jobs should be deterministic whenever possible.
+
+---
+
+## Queue Management
+
+Queues should support:
+
+- prioritization
+- retry handling
+- dead-letter strategy
+- visibility into pending work
+- cancellation when appropriate
+
+Queue health should be observable.
+
+---
+
+## Retry Strategy
+
+Retries should be:
+
+- bounded
+- idempotent
+- observable
+
+Repeated failures should escalate rather than loop indefinitely.
+
+---
+
+## Failure Handling
+
+Every job should define:
+
+- retry conditions
+- permanent failure conditions
+- compensation actions
+- manual recovery process
+
+Background failures should never remain silent.
+
+---
+
+## Scheduling
+
+Scheduled jobs should document:
+
+- execution frequency
+- business justification
+- expected duration
+- concurrency policy
+- monitoring strategy
+
+Avoid undocumented scheduled processes.
+
+---
+
+## Resource Management
+
+Background processing should consider:
+
+- concurrency limits
+- CPU usage
+- memory consumption
+- external API quotas
+- database load
+
+Prevent background work from degrading interactive workloads.
+
+---
+
+## Observability
+
+Monitor:
+
+- queue depth
+- execution time
+- retry rate
+- failed jobs
+- throughput
+- worker utilization
+
+Operational teams should understand queue health at all times.
+
+---
+
+## Deliverables
+
+Every background processing proposal should define:
+
+- synchronous vs asynchronous decision
+- job design
+- retry strategy
+- failure handling
+- monitoring plan
+- operational ownership
+
+Avoid introducing background jobs without operational visibility.
