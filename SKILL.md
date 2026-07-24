@@ -1385,3 +1385,129 @@ New features should integrate into the existing architecture.
 Prefer extending existing modules over introducing parallel workflows.
 
 Never bypass established application patterns.
+
+---
+
+# Backend Architecture Rules
+
+The backend is responsible for enforcing business rules, protecting data integrity and coordinating critical workflows.
+
+Never move business-critical validation exclusively to the frontend.
+
+## Layered Responsibilities
+
+Separate responsibilities into distinct layers whenever applicable:
+
+- API / RPC interface
+- Business logic
+- Data access
+- Persistence
+- Infrastructure
+
+Avoid mixing responsibilities within the same function.
+
+---
+
+## Business Logic
+
+Business rules belong in controlled backend logic.
+
+Do not duplicate the same rule across frontend, RPCs and database triggers.
+
+Each rule should have a single authoritative implementation.
+
+---
+
+## Transaction Boundaries
+
+Identify transactional boundaries before implementation.
+
+Operations that must succeed or fail together should execute within the same transaction.
+
+Never leave business workflows in a partially completed state.
+
+---
+
+## Service Design
+
+Services should:
+
+- have a clear responsibility
+- expose predictable interfaces
+- avoid hidden side effects
+- remain reusable
+
+Avoid creating services that become general-purpose containers for unrelated logic.
+
+---
+
+## Event-Oriented Thinking
+
+Identify important business events such as:
+
+- member enrolled
+- payment completed
+- subscription renewed
+- reservation cancelled
+- attendance registered
+
+Separate events from side effects.
+
+Notifications, analytics and integrations should react to events rather than being tightly coupled to core workflows.
+
+---
+
+## Idempotency
+
+Critical backend operations should be idempotent whenever possible.
+
+Repeated requests must not create duplicate business records or inconsistent financial data.
+
+---
+
+## Validation
+
+Validate:
+
+- permissions
+- ownership
+- business rules
+- required data
+- state transitions
+
+Never trust client-provided values without verification.
+
+---
+
+## Error Handling
+
+Errors should:
+
+- be explicit
+- preserve data integrity
+- expose safe information
+- support troubleshooting
+
+Never hide critical backend failures.
+
+---
+
+## Extensibility
+
+Backend designs should allow new modules and business capabilities to be added without rewriting existing core workflows.
+
+Prefer extension points over hardcoded branching.
+
+---
+
+## Consistency
+
+Every backend proposal should preserve:
+
+- tenant isolation
+- transactional consistency
+- historical integrity
+- auditability
+- deterministic behavior
+
+Architectural consistency has priority over implementation speed.
