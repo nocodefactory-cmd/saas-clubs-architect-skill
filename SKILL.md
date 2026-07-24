@@ -1672,3 +1672,175 @@ Every audit should end with:
 - Suggested implementation phases
 
 Do not implement unless explicitly requested.
+
+---
+
+# Security & Authorization Standards
+
+Security is a core architectural concern.
+
+Never treat security as a final implementation step.
+
+Every feature must be designed with security from the beginning.
+
+---
+
+## Authentication vs Authorization
+
+Always distinguish:
+
+Authentication
+
+Who is the actor?
+
+Authorization
+
+What is the actor allowed to do?
+
+Never confuse these concepts.
+
+---
+
+## Least Privilege
+
+Every user, service and function must operate with the minimum permissions required.
+
+Never grant broad permissions for convenience.
+
+Elevated privileges must be explicit, justified and auditable.
+
+---
+
+## Permissions
+
+Prefer fine-grained permissions over hardcoded role checks.
+
+Model permissions independently from roles whenever practical.
+
+Roles group permissions.
+
+Permissions authorize actions.
+
+---
+
+## Multi-Tenant Security
+
+Never allow data leakage between tenants.
+
+Every request must validate:
+
+- authenticated actor
+- tenant ownership
+- business ownership
+- branch scope
+- resource ownership
+
+Do not rely on frontend filters for isolation.
+
+---
+
+## Row Level Security
+
+RLS is mandatory for tenant-owned data.
+
+Policies must enforce ownership at the database level.
+
+Never disable RLS to simplify development.
+
+When RLS becomes complex, simplify the model rather than bypassing security.
+
+---
+
+## SECURITY DEFINER
+
+Use SECURITY DEFINER only when strictly necessary.
+
+Every SECURITY DEFINER function must:
+
+- validate the caller
+- validate tenant scope
+- validate permissions
+- use a restricted search_path
+- expose only the minimum required capability
+
+Never create privileged functions without explicit authorization checks.
+
+---
+
+## Input Validation
+
+Never trust client-provided input.
+
+Validate:
+
+- identifiers
+- ownership
+- state transitions
+- permissions
+- business rules
+- required fields
+
+Reject invalid requests before modifying data.
+
+---
+
+## Sensitive Data
+
+Minimize exposure of:
+
+- personal information
+- financial data
+- authentication details
+- internal identifiers
+- security metadata
+
+Expose only what is necessary.
+
+---
+
+## Auditability
+
+Sensitive operations should be traceable.
+
+Whenever appropriate record:
+
+- actor
+- action
+- resource
+- timestamp
+- outcome
+
+Logs should support investigation without exposing confidential information.
+
+---
+
+## Secrets
+
+Never hardcode:
+
+- API keys
+- service credentials
+- tokens
+- passwords
+
+Secrets belong in secure environment configuration.
+
+---
+
+## Error Messages
+
+Error messages should help legitimate users without revealing internal implementation details.
+
+Never expose stack traces, SQL statements or privileged information to end users.
+
+---
+
+## Secure by Default
+
+When uncertainty exists,
+
+choose the safest behavior.
+
+Security has priority over convenience.
+
+Architectural correctness has priority over implementation speed.
