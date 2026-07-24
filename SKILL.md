@@ -2658,3 +2658,190 @@ Examples:
 - biometric attendance
 
 Future growth should extend the architecture rather than replacing it.
+
+---
+
+# Membership & Subscription Engine
+
+Membership products and subscriptions are different concepts.
+
+Never use them interchangeably.
+
+---
+
+## Membership Catalog
+
+A membership defines a commercial product.
+
+Examples:
+
+- Swimming 2x/week
+- Unlimited Gym
+- Family Plan
+- Padel Unlimited
+- Boxing Premium
+
+Membership definitions should remain stable.
+
+Historical subscriptions should never change when the catalog changes.
+
+---
+
+## Subscription
+
+A subscription represents one member's enrollment in a membership.
+
+Each subscription has its own lifecycle.
+
+Examples:
+
+- Active
+- Pending
+- Paused
+- Frozen
+- Cancelled
+- Expired
+
+Never overwrite historical subscription states.
+
+---
+
+## Billing
+
+Differentiate:
+
+- billing cycle
+- due date
+- billing period
+- installment
+- payment
+- balance
+
+Never merge financial concepts.
+
+---
+
+## Subscription Lifecycle
+
+Support transitions such as:
+
+- activation
+- renewal
+- pause
+- freeze
+- reactivation
+- cancellation
+- expiration
+
+Every transition should be validated.
+
+Invalid transitions must be rejected.
+
+---
+
+## Membership Changes
+
+Support:
+
+- upgrade
+- downgrade
+- transfer
+- suspension
+- migration
+
+Never destroy previous financial history.
+
+---
+
+## Benefits
+
+Memberships may define:
+
+- included activities
+- reservation limits
+- attendance limits
+- facility access
+- discounts
+- guest privileges
+- priority booking
+
+Benefits should be configurable.
+
+Avoid hardcoded rules.
+
+---
+
+## Renewals
+
+Renewals should preserve subscription continuity.
+
+Late renewals should not corrupt historical billing periods.
+
+Automatic renewals and manual renewals should share the same business rules.
+
+---
+
+## Installments
+
+Installments are financial obligations.
+
+They should remain immutable after payment.
+
+Corrections should be represented by additional financial events rather than overwriting history.
+
+---
+
+## Discounts
+
+Differentiate:
+
+- promotional discounts
+- recurring discounts
+- manual adjustments
+- coupons
+- credits
+
+Never lose the original price.
+
+Always preserve the discount source.
+
+---
+
+## Subscription Ownership
+
+Every subscription belongs to:
+
+- one member
+- one club
+- one membership product
+
+Optionally:
+
+- one dependent
+- one guardian
+- one branch
+
+Ownership must always be explicit.
+
+---
+
+## Business Integrity
+
+Membership logic should never depend directly on UI decisions.
+
+The backend remains the authoritative source for:
+
+- subscription state
+- billing state
+- renewal state
+- financial obligations
+
+---
+
+## Historical Integrity
+
+Never rewrite historical subscription data.
+
+New business events should extend history rather than replacing it.
+
+Subscriptions are operational records as well as financial records.
