@@ -6625,3 +6625,152 @@ Every background processing proposal should define:
 - operational ownership
 
 Avoid introducing background jobs without operational visibility.
+
+---
+
+# Playbook — Caching Strategy
+
+Caching is a consistency optimization, not merely a performance optimization.
+
+Cache only when measurable benefits outweigh complexity and consistency risks.
+
+---
+
+## Cache Evaluation
+
+Before introducing caching evaluate:
+
+- computation cost
+- query frequency
+- data volatility
+- consistency requirements
+- acceptable staleness
+
+Not every expensive operation should be cached.
+
+---
+
+## Cache Candidates
+
+Typical candidates include:
+
+- configuration
+- feature flags
+- reference catalogs
+- public metadata
+- analytics snapshots
+- expensive aggregate queries
+
+Avoid caching highly volatile transactional data unless justified.
+
+---
+
+## Cache Ownership
+
+Every cached resource should define:
+
+- authoritative source
+- cache owner
+- invalidation trigger
+- refresh strategy
+- expiration policy
+
+The source of truth must remain explicit.
+
+---
+
+## Cache Invalidation
+
+Define invalidation before implementation.
+
+Possible strategies:
+
+- time-based (TTL)
+- event-driven
+- write-through
+- write-behind
+- manual invalidation
+
+Invalidation strategy is more important than storage technology.
+
+---
+
+## Consistency
+
+Choose the required consistency model.
+
+Examples:
+
+- strong consistency
+- eventual consistency
+- stale-while-revalidate
+
+Business requirements determine acceptable freshness.
+
+---
+
+## Failure Behavior
+
+The system should continue functioning if the cache becomes unavailable.
+
+Cache failures should degrade performance rather than correctness.
+
+Never make cache availability a business dependency.
+
+---
+
+## Monitoring
+
+Monitor:
+
+- hit ratio
+- miss ratio
+- invalidation frequency
+- stale responses
+- memory utilization
+- refresh latency
+
+Caching effectiveness should be measurable.
+
+---
+
+## Technical Debt
+
+Review caches periodically.
+
+Remove caches that:
+
+- provide little benefit
+- duplicate other caches
+- complicate maintenance
+
+Unused caches increase operational complexity.
+
+---
+
+## Documentation
+
+Every caching proposal should document:
+
+- authoritative source
+- consistency model
+- invalidation strategy
+- TTL
+- monitoring approach
+- fallback behavior
+
+Documentation should explain why caching is justified.
+
+---
+
+## Deliverables
+
+Every caching proposal should include:
+
+- justification
+- consistency assessment
+- invalidation strategy
+- monitoring plan
+- operational risks
+
+Avoid introducing caching without a documented invalidation strategy.
