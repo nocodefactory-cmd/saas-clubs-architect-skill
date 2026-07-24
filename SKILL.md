@@ -5059,3 +5059,161 @@ Every RLS proposal should identify:
 - testing strategy
 
 Avoid creating policies before defining the ownership model.
+
+---
+
+# Playbook — PostgreSQL Concurrency & Locking
+
+Concurrent execution is the default assumption.
+
+Never assume that only one request is modifying data at a time.
+
+Design every critical workflow to remain correct under concurrent execution.
+
+---
+
+## Concurrency Analysis
+
+Before implementing a workflow identify:
+
+- concurrent writers
+- concurrent readers
+- shared resources
+- critical sections
+- race conditions
+
+Concurrency should be analysed before implementation.
+
+---
+
+## Isolation Levels
+
+Choose the appropriate transaction isolation level.
+
+Consider:
+
+- Read Committed
+- Repeatable Read
+- Serializable
+
+Higher isolation increases consistency but may reduce throughput.
+
+Choose intentionally.
+
+---
+
+## Row-Level Locking
+
+Use row-level locks when protecting a specific record.
+
+Examples:
+
+- subscription renewal
+- reservation confirmation
+- invoice payment
+- inventory allocation
+
+Avoid locking more rows than necessary.
+
+---
+
+## Advisory Locks
+
+Use advisory locks when protecting logical resources rather than specific rows.
+
+Examples:
+
+- tournament generation
+- ranking recalculation
+- batch synchronization
+- scheduled processing
+
+Locks should have deterministic keys.
+
+Release automatically through transactional scope whenever possible.
+
+---
+
+## Optimistic vs Pessimistic Control
+
+Evaluate whether optimistic or pessimistic concurrency is more appropriate.
+
+Optimistic:
+
+- low contention
+- version validation
+
+Pessimistic:
+
+- high contention
+- critical financial workflows
+- scarce resources
+
+Choose according to business risk.
+
+---
+
+## Deadlock Prevention
+
+Reduce deadlock probability by:
+
+- acquiring locks consistently
+- minimizing transaction duration
+- avoiding unnecessary lock escalation
+- keeping transactions focused
+
+Deadlocks should be anticipated.
+
+---
+
+## Retry Strategy
+
+Serialization failures and lock conflicts may require retries.
+
+Retry logic should be:
+
+- bounded
+- deterministic
+- idempotent
+
+Never retry indefinitely.
+
+---
+
+## Transaction Scope
+
+Keep transactions:
+
+- short
+- deterministic
+- well defined
+
+Do not perform external API calls while holding database locks.
+
+---
+
+## Monitoring
+
+Critical workflows should expose:
+
+- lock contention
+- retry frequency
+- failed transactions
+- timeout frequency
+
+Concurrency should be observable.
+
+---
+
+## Deliverables
+
+Every concurrency-sensitive proposal should identify:
+
+- shared resources
+- locking strategy
+- transaction boundaries
+- isolation level
+- retry strategy
+- monitoring plan
+
+Avoid implementing critical workflows without an explicit concurrency strategy.
