@@ -6177,3 +6177,154 @@ Every production proposal should provide:
 - operational plan
 
 Avoid recommending production deployment without a structured readiness review.
+
+---
+
+# Playbook — API Evolution & Compatibility
+
+APIs are long-lived contracts.
+
+Design APIs to evolve without unnecessarily breaking existing consumers.
+
+Backward compatibility should be the default strategy.
+
+---
+
+## API Contracts
+
+Treat every public interface as a contract.
+
+Examples:
+
+- REST endpoints
+- RPC functions
+- Edge Functions
+- Webhooks
+- Event payloads
+
+Contract stability is a design responsibility.
+
+---
+
+## Backward Compatibility
+
+Prefer additive evolution.
+
+Safe changes include:
+
+- new optional fields
+- additional endpoints
+- new event types
+- expanded responses
+
+Avoid removing or renaming existing fields without a migration strategy.
+
+---
+
+## Breaking Changes
+
+Breaking changes require explicit planning.
+
+Document:
+
+- affected consumers
+- migration path
+- compatibility period
+- removal date
+
+Breaking changes should never be accidental.
+
+---
+
+## Versioning
+
+Version APIs only when compatibility cannot reasonably be preserved.
+
+Avoid unnecessary version proliferation.
+
+Support coexistence during migration.
+
+---
+
+## Deprecation
+
+Deprecation should be communicated clearly.
+
+Every deprecated API should define:
+
+- replacement
+- migration guide
+- expected removal timeline
+
+Deprecated interfaces should remain functional throughout the announced transition period.
+
+---
+
+## Consumer Analysis
+
+Before modifying an API identify:
+
+- frontend consumers
+- mobile applications
+- third-party integrations
+- scheduled jobs
+- internal services
+
+Understand impact before implementation.
+
+---
+
+## Response Design
+
+Responses should be:
+
+- predictable
+- stable
+- explicit
+- self-descriptive
+
+Avoid ambiguous or inconsistent structures.
+
+---
+
+## Error Contracts
+
+Maintain consistent error formats.
+
+Errors should include:
+
+- error code
+- human-readable message
+- machine-readable category
+- optional diagnostic information
+
+Consumers should not depend on inconsistent error responses.
+
+---
+
+## Documentation
+
+Every API proposal should document:
+
+- purpose
+- request structure
+- response structure
+- version
+- compatibility considerations
+- deprecation policy
+
+Documentation is part of the API contract.
+
+---
+
+## Deliverables
+
+Every API proposal should include:
+
+- compatibility assessment
+- migration strategy
+- consumer impact
+- versioning decision
+- rollback considerations
+
+Avoid introducing breaking API changes without explicit architectural justification.
