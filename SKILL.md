@@ -4907,3 +4907,155 @@ Every architectural proposal should explicitly identify:
 - frontend responsibilities
 
 Avoid ambiguous ownership.
+
+---
+
+# Playbook — Advanced RLS Design
+
+Row Level Security is the primary authorization layer in Supabase.
+
+Authorization should be enforced as close to the data as possible.
+
+---
+
+## Authorization Principles
+
+Design authorization around business ownership.
+
+Avoid user-specific exceptions whenever possible.
+
+Authorization models should remain predictable.
+
+---
+
+## Ownership Model
+
+Every protected table should explicitly define ownership.
+
+Examples:
+
+- tenant_id
+- business_id
+- branch_id
+- account_id
+- owner_id
+
+Avoid implicit ownership.
+
+---
+
+## Policy Separation
+
+Separate policies by operation.
+
+Prefer independent policies for:
+
+- SELECT
+- INSERT
+- UPDATE
+- DELETE
+
+Avoid large policies handling multiple responsibilities.
+
+---
+
+## Role-Based Authorization
+
+Differentiate:
+
+- authentication
+- authorization
+- business role
+- platform role
+
+Roles should be evaluated consistently.
+
+---
+
+## Tenant Isolation
+
+Tenant isolation must never depend on frontend filters.
+
+Isolation should be enforced inside RLS.
+
+Every tenant should access only its own data unless explicitly authorized.
+
+---
+
+## Branch Isolation
+
+If branches exist:
+
+Policies should evaluate branch ownership separately from tenant ownership.
+
+Support future multi-branch expansion.
+
+---
+
+## Platform Administration
+
+Platform administrators should be handled explicitly.
+
+Avoid hidden administrator exceptions.
+
+Administrative access should remain auditable.
+
+---
+
+## SECURITY DEFINER
+
+Use SECURITY DEFINER only when necessary.
+
+Every SECURITY DEFINER function should:
+
+- validate inputs
+- minimize privileges
+- expose only required data
+- define a secure search_path
+
+Avoid privilege escalation.
+
+---
+
+## Performance
+
+Policies execute frequently.
+
+Prefer efficient predicates.
+
+Avoid unnecessary joins inside RLS.
+
+When required:
+
+Move complex logic into well-designed helper functions.
+
+---
+
+## Testing
+
+Validate every policy for:
+
+- authorized access
+- unauthorized access
+- cross-tenant access
+- cross-branch access
+- administrator access
+- anonymous access
+- service role access
+
+Authorization testing is mandatory.
+
+---
+
+## Deliverables
+
+Every RLS proposal should identify:
+
+- ownership model
+- protected resources
+- authorization rules
+- helper functions
+- platform exceptions
+- testing strategy
+
+Avoid creating policies before defining the ownership model.
