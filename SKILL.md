@@ -3675,3 +3675,216 @@ Every migration proposal should include:
 - cleanup criteria
 
 Never present destructive SQL without the preceding migration plan.
+
+---
+
+# Playbook — Transactional Workflow & Idempotency
+
+Critical business operations must execute atomically, consistently and safely.
+
+Never assume a request will be executed only once.
+
+Every important workflow should tolerate retries without corrupting business data.
+
+---
+
+## Critical Operations
+
+Always evaluate whether the workflow involves:
+
+- payments
+- subscription renewals
+- reservation confirmation
+- attendance registration
+- enrollment
+- refunds
+- inventory
+- invoices
+- financial adjustments
+- tournament generation
+- ranking updates
+
+Critical workflows require transactional thinking.
+
+---
+
+## Atomic Execution
+
+Business operations that must succeed together should execute within the same transaction.
+
+Never leave partially completed workflows.
+
+If one critical step fails:
+
+Rollback the entire operation whenever appropriate.
+
+---
+
+## Idempotency
+
+Every externally triggered critical workflow should evaluate whether idempotency is required.
+
+Examples:
+
+- payment webhook
+- checkout
+- renewal
+- reservation confirmation
+- QR check-in
+- API callback
+
+Repeated execution should produce the same business result.
+
+Never duplicate business events because a request was retried.
+
+---
+
+## Idempotency Keys
+
+When appropriate define:
+
+- idempotency key
+- scope
+- expiration
+- storage
+- validation rules
+
+Idempotency should be based on deterministic business identity rather than request timing.
+
+---
+
+## State Validation
+
+Before modifying data verify:
+
+- current state
+- expected state
+- allowed transition
+
+Reject invalid transitions.
+
+Never overwrite unknown states.
+
+---
+
+## Concurrency Control
+
+Identify operations that may execute simultaneously.
+
+Examples:
+
+- two payments
+- two reservations
+- simultaneous check-in
+- concurrent renewals
+- inventory allocation
+
+Protect critical sections through appropriate transactional mechanisms.
+
+---
+
+## Retry Strategy
+
+Differentiate:
+
+- safe retry
+- unsafe retry
+- manual retry
+- automatic retry
+
+Not every failure should be retried automatically.
+
+---
+
+## Side Effects
+
+Separate:
+
+Core transaction
+
+↓
+
+Side effects
+
+Examples of side effects:
+
+- email
+- WhatsApp
+- push notification
+- analytics
+- audit logs
+- CRM synchronization
+
+Core business completion must not depend on notification delivery.
+
+---
+
+## External Providers
+
+Never assume external systems execute exactly once.
+
+Webhooks may arrive:
+
+- duplicated
+- delayed
+- reordered
+
+Business logic should tolerate these conditions safely.
+
+---
+
+## Compensation
+
+When rollback is impossible:
+
+Define compensating business actions.
+
+Examples:
+
+- reversal
+- credit
+- cancellation
+- corrective financial event
+
+Never silently ignore partially completed workflows.
+
+---
+
+## Transaction Boundaries
+
+Explicitly define:
+
+- where the transaction starts
+- where it ends
+- what is protected
+- what occurs outside the transaction
+
+Keep transactions as small as practical without sacrificing consistency.
+
+---
+
+## Validation
+
+Every transactional workflow should define:
+
+- success criteria
+- rollback conditions
+- retry behavior
+- idempotency behavior
+- concurrency behavior
+- monitoring strategy
+
+---
+
+## Deliverables
+
+Every transactional proposal should include:
+
+- workflow diagram
+- transactional boundary
+- idempotency strategy
+- concurrency strategy
+- rollback or compensation strategy
+- validation checklist
+
+Never propose critical workflows without explicitly defining these elements.
