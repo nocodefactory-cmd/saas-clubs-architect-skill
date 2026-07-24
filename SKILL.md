@@ -3246,3 +3246,140 @@ Never rewrite historical attendance.
 Never silently delete reservation history.
 
 Corrections should be represented as new operational events whenever practical.
+
+---
+
+# Playbook — Single Source of Truth
+
+One business concept must have one authoritative writable source.
+
+Multiple writable sources are considered an architectural smell.
+
+---
+
+## Detection
+
+During every audit identify:
+
+- duplicated entities
+- duplicated business state
+- duplicated financial records
+- duplicated attendance
+- duplicated reservations
+- duplicated enrollments
+- duplicated scheduling data
+
+Classify every duplicated source.
+
+---
+
+## Classification
+
+Determine whether duplication is:
+
+- intentional projection
+- read model
+- cache
+- synchronization
+- historical archive
+- accidental duplication
+
+Only accidental duplication should be eliminated.
+
+---
+
+## Investigation
+
+For every duplicated source identify:
+
+- authoritative source
+- synchronization direction
+- update frequency
+- consumers
+- dependencies
+
+Never recommend consolidation before understanding dependencies.
+
+---
+
+## Decision Process
+
+If multiple writable sources exist:
+
+1. Identify the authoritative source.
+2. Freeze expansion of duplicate logic.
+3. Redirect new writes.
+4. Backfill missing data.
+5. Validate consistency.
+6. Deprecate duplicate source.
+7. Remove only after verification.
+
+Never remove a source before successful validation.
+
+---
+
+## Synchronization
+
+Avoid bidirectional synchronization.
+
+Prefer:
+
+Authoritative Source
+
+↓
+
+Read Models
+
+↓
+
+UI
+
+Instead of:
+
+Source A
+
+↔
+
+Source B
+
+---
+
+## Historical Preservation
+
+Never lose historical information during consolidation.
+
+If historical records must be preserved:
+
+Archive them.
+
+Do not overwrite them.
+
+---
+
+## Verification
+
+Before declaring consolidation complete verify:
+
+- identical record counts where applicable
+- business consistency
+- financial consistency
+- permission consistency
+- reporting consistency
+
+Any discrepancy must be investigated before decommissioning the old source.
+
+---
+
+## Deliverables
+
+Every consolidation proposal should include:
+
+- current architecture
+- duplicated sources
+- authoritative source
+- migration plan
+- rollback strategy
+- validation plan
+- implementation phases
+
+Never recommend a rewrite when controlled migration is possible.
