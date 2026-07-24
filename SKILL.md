@@ -5521,3 +5521,174 @@ Every performance proposal should include:
 - monitoring strategy
 
 Never recommend indexes without explaining why they improve the workload.
+
+---
+
+# Playbook — RPC Design Patterns
+
+RPC functions should represent business capabilities rather than SQL shortcuts.
+
+Treat RPCs as stable service boundaries within PostgreSQL.
+
+---
+
+## Purpose
+
+Create RPCs for:
+
+- transactional workflows
+- domain services
+- deterministic calculations
+- controlled state transitions
+- business orchestration
+
+Avoid creating RPCs that simply expose arbitrary SQL.
+
+---
+
+## Domain-Oriented Design
+
+RPC names should describe business actions.
+
+Prefer:
+
+- renew_membership()
+- confirm_reservation()
+- create_invoice()
+- generate_tournament()
+
+Instead of:
+
+- update_subscription_status()
+- insert_payment()
+- modify_table()
+
+Business intent should be explicit.
+
+---
+
+## Single Responsibility
+
+Each RPC should have one primary responsibility.
+
+Avoid functions that:
+
+- perform unrelated workflows
+- return unrelated data
+- execute optional behavior controlled by many flags
+
+---
+
+## Transaction Ownership
+
+If a workflow must execute atomically:
+
+The RPC should own the transaction.
+
+Avoid splitting transactional workflows across multiple client calls.
+
+---
+
+## Input Validation
+
+Validate:
+
+- required parameters
+- ownership
+- authorization
+- business state
+- invariants
+
+Reject invalid requests early.
+
+---
+
+## Output Design
+
+Return structured results.
+
+Prefer:
+
+- success
+- business identifiers
+- warnings
+- validation messages
+- business status
+
+Avoid returning ambiguous values.
+
+---
+
+## Error Strategy
+
+Differentiate:
+
+- validation errors
+- authorization errors
+- business rule violations
+- unexpected failures
+
+Errors should be meaningful.
+
+---
+
+## Versioning
+
+Avoid modifying established RPC contracts unnecessarily.
+
+When breaking changes are required:
+
+Create a new version.
+
+Support coexistence during migration.
+
+---
+
+## Security
+
+RPCs should respect:
+
+- RLS
+- authorization model
+- ownership
+- least privilege
+
+Avoid bypassing security unintentionally.
+
+---
+
+## Performance
+
+Avoid unnecessary queries.
+
+Reuse existing data inside the transaction whenever possible.
+
+Minimize database round trips.
+
+---
+
+## Observability
+
+Critical RPCs should support:
+
+- audit logging
+- execution tracing
+- business diagnostics
+- performance monitoring
+
+---
+
+## Deliverables
+
+Every RPC proposal should define:
+
+- business objective
+- inputs
+- outputs
+- transaction scope
+- validation rules
+- authorization
+- failure conditions
+- versioning strategy
+
+Avoid designing RPCs around tables instead of business capabilities.
