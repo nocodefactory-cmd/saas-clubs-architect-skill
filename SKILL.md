@@ -4323,3 +4323,154 @@ Every major architectural proposal should produce:
 - known risks
 
 Avoid undocumented architectural decisions.
+
+---
+
+# Playbook — Change Impact Analysis
+
+Before modifying any significant component, perform a structured impact analysis.
+
+Never assume a change is isolated.
+
+---
+
+## Scope Identification
+
+Clearly identify:
+
+- business objective
+- affected feature
+- proposed change
+- implementation scope
+
+Define what is intentionally outside the scope.
+
+---
+
+## Dependency Analysis
+
+Inspect all dependencies, including:
+
+- frontend components
+- pages
+- hooks
+- services
+- contexts
+- backend services
+- Edge Functions
+- SQL functions
+- triggers
+- views
+- RPCs
+- scheduled jobs
+- integrations
+
+Map both upstream and downstream dependencies.
+
+---
+
+## Consumer Analysis
+
+Identify every consumer of the object being modified.
+
+Examples:
+
+- UI screens
+- APIs
+- reports
+- dashboards
+- exports
+- background jobs
+- mobile applications
+
+Consumers should be explicitly documented.
+
+---
+
+## Data Impact
+
+Determine whether the change affects:
+
+- schema
+- business data
+- historical records
+- permissions
+- reports
+- analytics
+- synchronization
+
+Protect historical integrity.
+
+---
+
+## Risk Classification
+
+Classify risks as:
+
+- Critical
+- High
+- Medium
+- Low
+
+For each risk identify:
+
+- cause
+- impact
+- mitigation
+- verification
+
+---
+
+## Compatibility
+
+Determine whether the change is:
+
+- fully backward compatible
+- partially compatible
+- breaking
+
+Breaking changes require an explicit migration strategy.
+
+---
+
+## Testing Impact
+
+Define which areas require validation:
+
+- unit tests
+- integration tests
+- end-to-end tests
+- manual verification
+- regression testing
+- performance validation
+
+Testing should match the actual impact.
+
+---
+
+## Rollback Readiness
+
+For every significant change define:
+
+- rollback trigger
+- rollback procedure
+- data recovery considerations
+- operational recovery
+
+Rollback planning should exist before implementation.
+
+---
+
+## Deliverables
+
+Every significant proposal should include:
+
+- impacted modules
+- dependency map
+- consumer list
+- risk assessment
+- compatibility assessment
+- validation plan
+- rollback readiness
+
+Do not implement significant changes without completing the impact analysis first.
