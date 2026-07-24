@@ -2845,3 +2845,215 @@ Never rewrite historical subscription data.
 New business events should extend history rather than replacing it.
 
 Subscriptions are operational records as well as financial records.
+
+---
+
+# Scheduling & Calendar Engine
+
+Scheduling is one of the most critical business domains.
+
+Never model recurring schedules, generated events, enrollments and attendance as the same concept.
+
+Each entity has an independent responsibility.
+
+---
+
+## Core Scheduling Model
+
+Always differentiate:
+
+- schedule template
+- recurring schedule
+- generated event instance
+- enrollment
+- reservation
+- attendance
+- cancellation
+- reschedule
+
+Do not merge these entities.
+
+---
+
+## Single Source of Truth
+
+Every scheduling workflow must define one authoritative source.
+
+Never maintain multiple writable sources for:
+
+- attendance
+- enrollments
+- event instances
+- reservations
+
+If duplication already exists:
+
+- identify it
+- classify it
+- recommend consolidation
+
+Never introduce a third writable source.
+
+---
+
+## Schedule Templates
+
+Templates describe recurrence rules.
+
+They do not represent executed classes.
+
+Changing a template must not rewrite historical class instances.
+
+---
+
+## Event Instances
+
+Generated instances represent real occurrences.
+
+Instances may contain:
+
+- assigned coach
+- assigned facility
+- start time
+- end time
+- operational status
+- capacity
+- attendance
+- notes
+
+Instances are operational records.
+
+---
+
+## Materialization Strategy
+
+Always define how event instances are created.
+
+Examples:
+
+- rolling generation
+- fixed horizon generation
+- on-demand generation
+
+Generation must be deterministic.
+
+Never generate duplicate instances.
+
+---
+
+## Enrollment Model
+
+Enrollment belongs to the recurring schedule.
+
+Attendance belongs to the generated event instance.
+
+Never confuse long-term enrollment with daily attendance.
+
+---
+
+## Reservation Model
+
+Reservations are operational allocations.
+
+They are different from enrollments.
+
+Support:
+
+- confirmation
+- cancellation
+- expiration
+- waitlists
+
+Reservation history should remain traceable.
+
+---
+
+## Attendance
+
+Attendance represents what actually happened.
+
+Never infer attendance from enrollment.
+
+Attendance should support:
+
+- present
+- absent
+- justified
+- late
+- cancelled
+
+---
+
+## Schedule Exceptions
+
+Support exceptions such as:
+
+- holiday
+- instructor replacement
+- facility replacement
+- cancellation
+- reschedule
+- temporary closure
+
+Exceptions should not corrupt recurring schedules.
+
+---
+
+## Capacity Management
+
+Capacity belongs to event instances.
+
+Do not calculate capacity exclusively from recurring schedules.
+
+Always consider:
+
+- reservations
+- enrollments
+- attendance
+- manual adjustments
+
+---
+
+## Synchronization
+
+When synchronization exists:
+
+Define:
+
+- authoritative source
+- synchronization direction
+- conflict resolution
+- retry strategy
+
+Avoid bidirectional synchronization whenever possible.
+
+---
+
+## Calendar Views
+
+Calendar views are projections.
+
+They are not business entities.
+
+Never store UI state as operational scheduling data.
+
+---
+
+## Historical Integrity
+
+Historical schedules must remain immutable.
+
+Past event instances should never change because future schedules are edited.
+
+---
+
+## Operational Consistency
+
+Scheduling decisions must always preserve:
+
+- historical integrity
+- deterministic generation
+- enrollment consistency
+- reservation consistency
+- attendance accuracy
+- auditability
