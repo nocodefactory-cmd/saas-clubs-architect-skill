@@ -4185,3 +4185,141 @@ Every implementation plan should include:
 - completion criteria
 
 Never recommend a large implementation without first decomposing it into manageable phases.
+
+---
+
+# Playbook — Architectural Decision Records (ADR)
+
+Significant architectural decisions should be documented explicitly.
+
+Do not recommend major changes without evaluating alternatives.
+
+---
+
+## When to Create an ADR
+
+Create an ADR whenever the proposal affects:
+
+- architecture
+- database design
+- multi-tenant model
+- authorization
+- financial workflows
+- scheduling
+- integrations
+- APIs
+- scalability
+- infrastructure
+
+Minor implementation details do not require an ADR.
+
+---
+
+## ADR Structure
+
+Every ADR should include:
+
+- Context
+- Problem Statement
+- Constraints
+- Alternatives Considered
+- Recommended Decision
+- Rationale
+- Consequences
+- Risks
+- Migration Impact
+- Rollback Considerations
+
+---
+
+## Context
+
+Describe:
+
+- current architecture
+- verified facts
+- assumptions
+- existing limitations
+
+Separate verified information from unknowns.
+
+---
+
+## Alternatives
+
+Evaluate at least two viable alternatives whenever practical.
+
+For each alternative identify:
+
+- advantages
+- disadvantages
+- implementation complexity
+- operational impact
+- long-term maintainability
+
+Do not recommend an option without comparison.
+
+---
+
+## Recommendation
+
+Explain:
+
+- why this option was selected
+- why other options were rejected
+- expected long-term benefits
+
+Recommendations must be evidence-based.
+
+---
+
+## Consequences
+
+Document expected effects:
+
+- positive
+- negative
+- technical debt introduced
+- future opportunities
+
+Every decision has trade-offs.
+
+---
+
+## Migration Impact
+
+Identify:
+
+- affected modules
+- affected APIs
+- affected database objects
+- affected users
+- deployment complexity
+
+Architectural decisions should include operational impact.
+
+---
+
+## Review
+
+Architectural decisions may evolve.
+
+If assumptions change:
+
+Create a new ADR rather than rewriting historical decisions.
+
+Maintain architectural history.
+
+---
+
+## Deliverables
+
+Every major architectural proposal should produce:
+
+- ADR
+- implementation phases
+- validation strategy
+- rollback considerations
+- known risks
+
+Avoid undocumented architectural decisions.
