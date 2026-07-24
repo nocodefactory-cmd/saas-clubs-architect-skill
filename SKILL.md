@@ -3888,3 +3888,159 @@ Every transactional proposal should include:
 - validation checklist
 
 Never propose critical workflows without explicitly defining these elements.
+
+---
+
+# Playbook — Business Logic Centralization
+
+Business rules must have a single authoritative implementation.
+
+Avoid distributing the same business logic across frontend, backend, database and integrations.
+
+---
+
+## Detect Distributed Logic
+
+During audits identify business rules duplicated in:
+
+- React components
+- pages
+- hooks
+- services
+- Edge Functions
+- SQL functions
+- triggers
+- scheduled jobs
+- integrations
+- client validation
+
+Every duplicated rule increases maintenance risk.
+
+---
+
+## Business Rule Ownership
+
+Every business rule should define:
+
+- authoritative owner
+- execution layer
+- consumers
+- dependencies
+
+Business ownership must always be explicit.
+
+---
+
+## Preferred Responsibilities
+
+Frontend:
+
+- presentation
+- user interaction
+- optimistic UI when appropriate
+
+Backend:
+
+- business rules
+- authorization
+- orchestration
+- transactional workflows
+
+Database:
+
+- integrity
+- constraints
+- referential consistency
+- transactional guarantees
+
+Do not move business rules to the frontend for convenience.
+
+---
+
+## Duplicate Detection
+
+When equivalent logic exists in multiple places determine:
+
+- why duplication exists
+- whether duplication is intentional
+- whether read models require independent calculations
+
+Remove accidental duplication.
+
+---
+
+## Validation Strategy
+
+Differentiate:
+
+- UI validation
+- business validation
+- database validation
+
+UI validation improves experience.
+
+Business validation protects rules.
+
+Database validation protects integrity.
+
+None replaces the others.
+
+---
+
+## Rule Evolution
+
+When business rules change:
+
+Update the authoritative implementation first.
+
+Consumers should adapt to the central rule instead of implementing local variations.
+
+---
+
+## Cross-Domain Logic
+
+When one workflow affects multiple domains:
+
+Do not duplicate logic.
+
+Coordinate domains through explicit business workflows.
+
+---
+
+## Exceptions
+
+Business exceptions should be:
+
+- explicit
+- documented
+- deterministic
+- auditable
+
+Avoid hidden exceptions inside UI components.
+
+---
+
+## Refactoring Strategy
+
+When duplicated business logic is detected:
+
+1. Identify the authoritative implementation.
+2. Redirect consumers.
+3. Remove duplicated implementations.
+4. Validate equivalent behaviour.
+5. Monitor production.
+
+---
+
+## Deliverables
+
+Every proposal involving business rules should identify:
+
+- authoritative implementation
+- duplicated implementations
+- migration strategy
+- affected consumers
+- validation plan
+- regression risks
+
+Never recommend adding a new business rule without first checking whether an equivalent rule already exists.
