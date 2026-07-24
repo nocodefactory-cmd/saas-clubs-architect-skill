@@ -5217,3 +5217,150 @@ Every concurrency-sensitive proposal should identify:
 - monitoring plan
 
 Avoid implementing critical workflows without an explicit concurrency strategy.
+
+---
+
+# Playbook — PostgreSQL Schema Evolution
+
+Database schemas should evolve incrementally without disrupting existing applications.
+
+Design for long-term evolution rather than immediate implementation convenience.
+
+---
+
+## Evolution Principles
+
+Prefer:
+
+- additive changes
+- backward compatibility
+- gradual migration
+- explicit deprecation
+
+Avoid destructive schema modifications whenever possible.
+
+---
+
+## Stable Identifiers
+
+Primary identifiers should remain stable.
+
+Avoid changing identifiers after release.
+
+Use surrogate keys when appropriate.
+
+Natural keys may evolve.
+
+---
+
+## Column Evolution
+
+Prefer:
+
+- adding new columns
+- deprecating old columns
+- migrating consumers gradually
+
+Avoid immediately renaming or dropping production columns.
+
+---
+
+## Table Evolution
+
+When tables become too large or responsibilities diverge:
+
+Prefer:
+
+- decomposition
+- composition
+- compatibility views
+
+Avoid unnecessary rewrites.
+
+---
+
+## Relationship Design
+
+Relationships should tolerate future expansion.
+
+Consider:
+
+- optional ownership
+- future many-to-many relations
+- future branch support
+- tenant evolution
+
+Design for future business growth.
+
+---
+
+## Enumerations
+
+Business states evolve.
+
+Prefer strategies allowing controlled expansion.
+
+When using PostgreSQL enums:
+
+Evaluate migration impact before introducing new values.
+
+---
+
+## Version Compatibility
+
+Support temporary coexistence of:
+
+- old consumers
+- new consumers
+- transitional APIs
+
+Compatibility periods should be planned.
+
+---
+
+## Data Preservation
+
+Historical data should remain valid after schema evolution.
+
+Never redesign by losing historical information.
+
+---
+
+## Deprecation
+
+Deprecation should be explicit.
+
+Document:
+
+- replacement
+- migration plan
+- removal criteria
+- expected removal date
+
+Temporary compatibility should not become permanent.
+
+---
+
+## Documentation
+
+Every schema evolution proposal should document:
+
+- current model
+- target model
+- compatibility strategy
+- migration phases
+- rollback considerations
+
+---
+
+## Deliverables
+
+Every schema evolution proposal should include:
+
+- additive strategy
+- migration plan
+- compatibility assessment
+- validation strategy
+- cleanup plan
+
+Avoid destructive schema redesign without an explicit evolution strategy.
