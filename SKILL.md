@@ -3383,3 +3383,295 @@ Every consolidation proposal should include:
 - implementation phases
 
 Never recommend a rewrite when controlled migration is possible.
+
+---
+
+# Playbook — Safe Migration & Backfill
+
+Database migrations must preserve data integrity, operational continuity and rollback capability.
+
+Never treat a migration as only a schema modification.
+
+A complete migration may include:
+
+- schema preparation
+- data backfill
+- application transition
+- validation
+- deprecation
+- cleanup
+
+---
+
+## Mandatory Phases
+
+Every significant migration should be divided into explicit phases:
+
+1. Audit
+2. Migration design
+3. Additive schema preparation
+4. Controlled backfill
+5. Validation
+6. Application cutover
+7. Compatibility period
+8. Deprecation
+9. Cleanup
+
+Do not combine all phases into one uncontrolled migration.
+
+---
+
+## Phase 1 — Audit
+
+Before modifying the database inspect:
+
+- current schema
+- existing records
+- null values
+- duplicates
+- orphan records
+- invalid states
+- dependent views
+- dependent RPCs
+- triggers
+- RLS policies
+- grants
+- frontend consumers
+- backend consumers
+- reports
+- integrations
+
+Never design a backfill from assumptions.
+
+---
+
+## Phase 2 — Migration Design
+
+Define:
+
+- source structure
+- target structure
+- field mapping
+- ownership mapping
+- status mapping
+- historical behavior
+- compatibility requirements
+- rollback strategy
+- validation criteria
+
+Every source field must have an explicit destination or an explicit reason for exclusion.
+
+---
+
+## Additive First
+
+Prefer additive changes.
+
+Examples:
+
+- create new columns
+- create new tables
+- create new constraints as not validated when appropriate
+- create compatibility views
+- create transitional RPCs
+
+Avoid immediately:
+
+- dropping columns
+- renaming critical objects
+- changing existing semantics
+- deleting legacy records
+
+Destructive operations belong only in the final cleanup phase.
+
+---
+
+## Backfill Design
+
+Backfills must be:
+
+- deterministic
+- repeatable
+- idempotent whenever possible
+- measurable
+- auditable
+- safe to resume
+
+Never rely on manual one-by-one corrections when a deterministic migration can be created.
+
+---
+
+## Batch Processing
+
+Large backfills should be processed in controlled batches.
+
+Consider:
+
+- transaction size
+- lock duration
+- execution time
+- database load
+- retry behavior
+- partial failure recovery
+
+Never place unnecessary load on production systems.
+
+---
+
+## Data Mapping
+
+For every migrated record determine:
+
+- source identifier
+- destination identifier
+- tenant ownership
+- branch ownership
+- user ownership
+- historical timestamp
+- migration status
+
+Preserve original identifiers when useful for traceability.
+
+---
+
+## Ambiguous Records
+
+Never guess when records cannot be mapped safely.
+
+Classify them as:
+
+- automatically migratable
+- requires deterministic correction
+- ambiguous
+- blocked
+- excluded with justification
+
+Ambiguous records must be reported separately.
+
+---
+
+## Validation
+
+Validation must compare source and destination.
+
+Whenever applicable verify:
+
+- record counts
+- monetary totals
+- ownership
+- status distribution
+- date ranges
+- null distribution
+- duplicate prevention
+- referential integrity
+- permission behavior
+- report consistency
+
+Do not validate only that the migration executed successfully.
+
+Execution success does not prove business correctness.
+
+---
+
+## Reconciliation
+
+Every backfill should produce a reconciliation report.
+
+The report should include:
+
+- total source records
+- total migrated records
+- total skipped records
+- total corrected records
+- total ambiguous records
+- total failed records
+- financial differences
+- unresolved discrepancies
+
+No unexplained discrepancy is acceptable.
+
+---
+
+## Cutover
+
+Application cutover should occur only after validation.
+
+Define:
+
+- when new writes begin using the target structure
+- whether legacy writes remain temporarily supported
+- how dual-write behavior is avoided
+- how old consumers are identified
+- how rollback will work
+
+Prefer one authoritative writable source during transition.
+
+---
+
+## Compatibility Period
+
+When necessary maintain temporary compatibility through:
+
+- views
+- adapters
+- transitional RPCs
+- feature flags
+- read-only legacy structures
+
+Compatibility mechanisms must have a removal plan.
+
+Never allow temporary architecture to become permanent accidentally.
+
+---
+
+## Rollback
+
+Every migration must define what can be rolled back.
+
+Differentiate:
+
+- schema rollback
+- application rollback
+- data rollback
+- operational rollback
+
+Never claim a migration is reversible when migrated business events cannot safely be undone.
+
+---
+
+## Cleanup
+
+Cleanup occurs only after:
+
+- application cutover is complete
+- validation passes
+- legacy consumers are removed
+- rollback window is closed
+- monitoring confirms stability
+
+Only then consider:
+
+- dropping deprecated columns
+- dropping deprecated tables
+- removing compatibility views
+- removing transitional triggers
+- removing legacy RPCs
+
+---
+
+## Migration Deliverables
+
+Every migration proposal should include:
+
+- verified current state
+- target architecture
+- migration phases
+- SQL objects affected
+- backfill rules
+- ambiguous-record policy
+- validation queries
+- reconciliation criteria
+- rollback strategy
+- cleanup criteria
+
+Never present destructive SQL without the preceding migration plan.
