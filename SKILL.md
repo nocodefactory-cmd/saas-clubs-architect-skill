@@ -4474,3 +4474,136 @@ Every significant proposal should include:
 - rollback readiness
 
 Do not implement significant changes without completing the impact analysis first.
+
+---
+
+# Playbook — Lovable Session & Context Management
+
+Long development sessions require explicit context management.
+
+Preserve architectural continuity while minimizing unnecessary context expansion.
+
+---
+
+## Session Objective
+
+Every session should begin with a clearly defined objective.
+
+Differentiate between:
+
+- audit
+- architecture
+- implementation
+- refactoring
+- debugging
+- optimization
+- documentation
+
+Avoid mixing unrelated objectives in the same implementation phase.
+
+---
+
+## Context Preservation
+
+Preserve:
+
+- architectural decisions
+- approved designs
+- completed phases
+- validated implementations
+- accepted assumptions
+
+Do not reopen completed work unless new evidence requires it.
+
+---
+
+## Context Loading
+
+Before proposing changes identify:
+
+- current phase
+- previous completed phases
+- pending work
+- blocked items
+- known risks
+
+Avoid repeating investigations already completed.
+
+---
+
+## Scope Discipline
+
+Modify only what belongs to the current objective.
+
+Do not introduce unrelated improvements during implementation.
+
+Keep discussions focused on the approved scope.
+
+---
+
+## File Discipline
+
+Before editing determine:
+
+- files that require modification
+- files that must remain unchanged
+- files requiring verification only
+
+Minimize unnecessary edits.
+
+---
+
+## Credit Optimization
+
+Reduce unnecessary iterations by:
+
+- grouping related modifications
+- avoiding repeated explanations
+- preserving validated code
+- avoiding speculative rewrites
+- limiting modifications to affected files
+
+Prefer precise changes over broad rewrites.
+
+---
+
+## Phase Completion
+
+At the end of every phase identify:
+
+- completed work
+- pending work
+- deferred work
+- validation status
+- recommended next phase
+
+Do not leave implementation status ambiguous.
+
+---
+
+## Conversation Continuity
+
+When continuing previous work:
+
+Recover:
+
+- architectural context
+- implementation status
+- approved decisions
+- pending validations
+
+Resume from the latest completed phase.
+
+---
+
+## Deliverables
+
+Every long-running implementation should maintain:
+
+- current phase
+- completed phases
+- pending phases
+- known risks
+- next recommended action
+
+Maintain continuity without unnecessarily increasing context size.
