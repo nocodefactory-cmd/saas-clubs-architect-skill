@@ -3057,3 +3057,192 @@ Scheduling decisions must always preserve:
 - reservation consistency
 - attendance accuracy
 - auditability
+
+---
+
+# Reservation & Attendance Engine
+
+Reservations, enrollments, attendance and check-in are independent operational concepts.
+
+Never merge them into a single workflow.
+
+---
+
+## Reservation Lifecycle
+
+A reservation represents the intention to occupy a limited resource.
+
+Typical reservation states include:
+
+- pending
+- confirmed
+- checked-in
+- completed
+- cancelled
+- expired
+- no-show
+
+Reservation state transitions must be validated.
+
+---
+
+## Reservation Ownership
+
+Every reservation belongs to:
+
+- one club
+- one branch
+- one facility
+- one event instance
+- one participant
+
+Ownership must always be explicit.
+
+---
+
+## Capacity Control
+
+Capacity belongs to the operational event instance.
+
+Capacity calculations should consider:
+
+- confirmed reservations
+- active enrollments
+- manual capacity adjustments
+- blocked spaces
+- waitlist promotions
+
+Never calculate capacity from templates alone.
+
+---
+
+## Waitlist
+
+Waitlists should be independent entities.
+
+Support:
+
+- ordered priority
+- automatic promotion
+- manual promotion
+- expiration
+- cancellation
+
+Promotion rules must be deterministic.
+
+---
+
+## Check-In
+
+Check-in represents arrival.
+
+It does not automatically represent attendance completion.
+
+Support:
+
+- manual check-in
+- QR check-in
+- staff check-in
+- self-service check-in
+
+Check-in timestamps should be preserved.
+
+---
+
+## Attendance
+
+Attendance records what actually occurred.
+
+Attendance statuses may include:
+
+- present
+- absent
+- justified absence
+- late arrival
+- early departure
+- cancelled
+
+Attendance should remain historically immutable.
+
+---
+
+## No-Show
+
+Differentiate:
+
+- cancelled reservation
+- expired reservation
+- no-show
+
+Each has different business meaning.
+
+Business rules may apply penalties or reporting independently.
+
+---
+
+## Cancellation Rules
+
+Cancellation policies should be configurable.
+
+Support:
+
+- member cancellation
+- staff cancellation
+- automatic expiration
+- emergency closure
+- weather closure
+
+Cancellation reason should always be recorded.
+
+---
+
+## Reservation Conflicts
+
+Prevent:
+
+- double booking
+- facility conflicts
+- participant conflicts
+- coach conflicts
+
+Conflict detection should occur before confirmation.
+
+---
+
+## Operational Audit
+
+Operational events should be traceable.
+
+Record when appropriate:
+
+- reservation created
+- reservation confirmed
+- reservation cancelled
+- check-in completed
+- attendance recorded
+- waitlist promotion
+
+Audit records support operational investigations.
+
+---
+
+## Business Separation
+
+Keep independent:
+
+- reservation logic
+- attendance logic
+- financial logic
+- communication logic
+
+Cross-domain actions should communicate through controlled business workflows, not hidden side effects.
+
+---
+
+## Historical Integrity
+
+Never rewrite historical attendance.
+
+Never silently delete reservation history.
+
+Corrections should be represented as new operational events whenever practical.
