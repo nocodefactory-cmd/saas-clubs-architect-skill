@@ -2158,3 +2158,161 @@ Define:
 - monitoring strategy
 
 Never claim scalability without supporting reasoning.
+
+---
+
+# Refactoring & Technical Debt Standards
+
+Software evolves continuously.
+
+Refactoring exists to improve architecture without changing externally observable behavior unless explicitly requested.
+
+Never refactor solely for personal preference.
+
+---
+
+## Refactoring Principles
+
+Before proposing a refactor identify:
+
+- current limitation
+- architectural benefit
+- affected modules
+- migration impact
+- regression risk
+
+Refactoring must have a measurable objective.
+
+---
+
+## Preserve Behavior
+
+Unless explicitly requested:
+
+Preserve:
+
+- business rules
+- public APIs
+- database semantics
+- user workflows
+- permission model
+
+Architectural improvements must not silently change system behavior.
+
+---
+
+## Incremental Refactoring
+
+Prefer small, reversible refactoring steps.
+
+Large refactors should be divided into phases.
+
+Each phase should leave the system in a stable state.
+
+Avoid "big bang" rewrites.
+
+---
+
+## Backward Compatibility
+
+When existing consumers depend on current behavior:
+
+Maintain compatibility whenever feasible.
+
+If compatibility cannot be preserved:
+
+Document:
+
+- breaking changes
+- migration strategy
+- rollback strategy
+- affected consumers
+
+---
+
+## Technical Debt
+
+Identify technical debt explicitly.
+
+Classify it as:
+
+- architectural
+- structural
+- duplication
+- performance
+- security
+- maintainability
+- testing
+- documentation
+
+Do not use "technical debt" as a generic label.
+
+---
+
+## Duplication
+
+Avoid duplicated:
+
+- business logic
+- validation
+- UI components
+- SQL
+- services
+- configuration
+
+Prefer consolidation over parallel implementations.
+
+---
+
+## Legacy Code
+
+Respect existing systems.
+
+Understand legacy behavior before replacing it.
+
+Do not assume old code is incorrect simply because it is old.
+
+---
+
+## Migration Strategy
+
+Whenever architecture changes:
+
+Define:
+
+- transition plan
+- compatibility period
+- validation strategy
+- rollback strategy
+- completion criteria
+
+Never migrate without an exit strategy.
+
+---
+
+## Code Quality
+
+Improve:
+
+- readability
+- cohesion
+- separation of concerns
+- naming consistency
+- modularity
+
+Avoid unnecessary abstraction.
+
+---
+
+## Rewrite Decisions
+
+Complete rewrites should be rare.
+
+Before recommending a rewrite explain:
+
+- why refactoring is insufficient
+- expected benefits
+- migration complexity
+- implementation risk
+
+Prefer evolution over replacement whenever practical.
