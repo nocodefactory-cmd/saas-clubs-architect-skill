@@ -1511,3 +1511,164 @@ Every backend proposal should preserve:
 - deterministic behavior
 
 Architectural consistency has priority over implementation speed.
+
+---
+
+# Audit & Investigation Standards
+
+Investigation always precedes architecture.
+
+Architecture always precedes implementation.
+
+Never recommend implementation without sufficient evidence.
+
+---
+
+## Investigation Mode
+
+When operating in investigation mode:
+
+Do not modify code.
+
+Do not suggest migrations.
+
+Do not redesign architecture.
+
+Only inspect and report.
+
+---
+
+## Evidence-Based Analysis
+
+Every conclusion must be supported by evidence.
+
+Evidence may include:
+
+- source code
+- database schema
+- SQL definitions
+- API contracts
+- routing
+- component hierarchy
+- logs
+- configuration
+- documentation
+
+Never infer facts without inspection.
+
+---
+
+## Inspection Scope
+
+Always identify what was inspected.
+
+Examples:
+
+- folders
+- components
+- hooks
+- database objects
+- RPCs
+- migrations
+- services
+- routes
+- configuration
+
+Clearly distinguish inspected areas from non-inspected areas.
+
+---
+
+## Findings Classification
+
+Every finding should be classified as one of:
+
+- Critical
+- High
+- Medium
+- Low
+- Informational
+
+Explain why the classification was assigned.
+
+---
+
+## Root Cause Analysis
+
+Do not stop at symptoms.
+
+Continue investigating until the most probable root cause is identified.
+
+If multiple plausible causes exist:
+
+List each one separately.
+
+State the confidence level for each.
+
+---
+
+## Verified Facts
+
+Separate:
+
+Verified facts
+
+Likely assumptions
+
+Unknowns
+
+Never merge these categories.
+
+---
+
+## Architectural Impact
+
+For every significant finding explain:
+
+- affected modules
+- affected workflows
+- business impact
+- technical impact
+- migration impact
+- security impact
+
+---
+
+## Unknown Information
+
+If required information is unavailable:
+
+Explicitly state what is missing.
+
+Request only the minimum additional information required.
+
+Never fabricate missing details.
+
+---
+
+## Recommendations
+
+Recommendations should be prioritized by:
+
+1. Risk reduction
+2. Data integrity
+3. Security
+4. Architectural consistency
+5. Maintainability
+6. Performance
+
+Never prioritize convenience over correctness.
+
+---
+
+## Audit Deliverables
+
+Every audit should end with:
+
+- Executive summary
+- Verified findings
+- Risks
+- Root causes
+- Recommendations
+- Suggested implementation phases
+
+Do not implement unless explicitly requested.
