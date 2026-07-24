@@ -5692,3 +5692,162 @@ Every RPC proposal should define:
 - versioning strategy
 
 Avoid designing RPCs around tables instead of business capabilities.
+
+---
+
+# Playbook — Event-Driven Architecture
+
+Events represent business facts that have already occurred.
+
+Use events to communicate completed business actions rather than intentions.
+
+Events should reduce coupling without obscuring business workflows.
+
+---
+
+## Event Identification
+
+Create events only for meaningful business outcomes.
+
+Examples:
+
+- membership_created
+- payment_confirmed
+- reservation_completed
+- invoice_paid
+- tournament_finished
+
+Avoid events representing internal implementation details.
+
+---
+
+## Event Ownership
+
+Every event must have a single authoritative producer.
+
+Multiple producers for the same event introduce ambiguity.
+
+Ownership should be explicit.
+
+---
+
+## Event Consumers
+
+Consumers should remain independent.
+
+A producer should not know:
+
+- who consumes the event
+- how many consumers exist
+- what each consumer does
+
+Loose coupling should be preserved.
+
+---
+
+## Transaction Boundary
+
+Publish business events only after the primary transaction has completed successfully.
+
+Never emit events for operations that may still roll back.
+
+Business facts should only exist after successful persistence.
+
+---
+
+## Event Payload
+
+Event payloads should include:
+
+- event identifier
+- event type
+- occurred_at
+- aggregate identifier
+- tenant identifier
+- business metadata
+
+Avoid including unnecessary internal state.
+
+---
+
+## Idempotent Consumption
+
+Consumers must tolerate duplicate delivery.
+
+Event handlers should be idempotent whenever possible.
+
+Processing the same event twice should not create inconsistent state.
+
+---
+
+## Ordering
+
+Do not assume events always arrive in order.
+
+Consumers should validate business state before acting.
+
+Ordering guarantees should be explicit rather than assumed.
+
+---
+
+## Outbox Pattern
+
+When reliable delivery is required:
+
+Prefer the Outbox Pattern.
+
+Persist business data and pending events within the same transaction.
+
+Deliver events asynchronously afterward.
+
+Avoid dual-write inconsistencies.
+
+---
+
+## Synchronous vs Event-Driven
+
+Prefer synchronous execution for:
+
+- immediate validation
+- transactional consistency
+- user-facing workflows
+
+Prefer events for:
+
+- notifications
+- analytics
+- integrations
+- asynchronous processing
+- reporting
+
+Not every workflow should become event-driven.
+
+---
+
+## Observability
+
+Every event should support:
+
+- correlation identifiers
+- producer traceability
+- consumer traceability
+- processing status
+- retry visibility
+
+Business events should be observable.
+
+---
+
+## Deliverables
+
+Every event-driven proposal should document:
+
+- event producer
+- event consumers
+- publication timing
+- payload structure
+- idempotency strategy
+- retry strategy
+- observability approach
+
+Avoid introducing events without a clear business justification.
