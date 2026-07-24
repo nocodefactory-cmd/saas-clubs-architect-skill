@@ -849,3 +849,211 @@ Every proposal should support:
 Never optimize architecture only for today's dataset.
 
 Always think five years ahead.
+
+---
+
+# Supabase Architecture Rules
+
+Supabase is the authoritative backend of the platform.
+
+Always design database changes before frontend changes.
+
+## Database First
+
+Every feature must begin by identifying:
+
+- affected tables
+- affected relationships
+- source of truth
+- constraints
+- indexes
+- RLS impact
+- migration requirements
+
+Never start by designing React components.
+
+---
+
+## Migrations
+
+Never modify production tables manually.
+
+All schema changes must be introduced through migrations.
+
+Prefer additive migrations.
+
+Avoid destructive changes.
+
+When introducing breaking changes:
+
+1. Create new structures.
+2. Backfill existing data.
+3. Validate results.
+4. Update application code.
+5. Remove deprecated structures only after verification.
+
+Never combine unrelated schema changes in the same migration.
+
+---
+
+## Tables
+
+Before creating a table verify whether an equivalent already exists.
+
+Prefer extending existing schemas.
+
+Avoid duplicated business entities.
+
+Every table should define:
+
+- primary key
+- foreign keys
+- ownership
+- timestamps
+- constraints
+- indexes
+- RLS strategy
+
+---
+
+## Foreign Keys
+
+Always prefer explicit foreign keys.
+
+Avoid orphan records.
+
+Never rely only on application logic to preserve integrity.
+
+---
+
+## Constraints
+
+Business rules should be enforced by the database whenever possible.
+
+Prefer:
+
+- CHECK constraints
+- UNIQUE constraints
+- FOREIGN KEY constraints
+
+instead of only frontend validation.
+
+---
+
+## Indexes
+
+Create indexes based on real query patterns.
+
+Do not index every column.
+
+Do not ignore missing indexes on frequently filtered columns.
+
+---
+
+## Views
+
+Use Views only when they simplify read models.
+
+Do not use Views as hidden business logic.
+
+Business rules belong in controlled backend logic.
+
+---
+
+## RPC Functions
+
+RPCs are preferred when:
+
+- multiple tables are modified
+- business transactions exist
+- concurrency matters
+- permissions are complex
+- frontend orchestration becomes unsafe
+
+Never split one transactional workflow into many independent frontend requests.
+
+---
+
+## Transactions
+
+Whenever multiple related records must remain consistent:
+
+Use database transactions.
+
+Examples:
+
+- payments
+- subscriptions
+- attendance
+- reservations
+- enrollments
+- membership changes
+
+Never leave partially completed workflows.
+
+---
+
+## Concurrency
+
+Always evaluate:
+
+- duplicate requests
+- simultaneous updates
+- race conditions
+- retries
+- idempotency
+
+Critical operations should be protected by transactional logic.
+
+---
+
+## Row Level Security
+
+RLS is mandatory.
+
+Never disable RLS to solve permission issues.
+
+Policies must protect tenant isolation.
+
+Frontend validation is never sufficient.
+
+---
+
+## Security Definer Functions
+
+When using SECURITY DEFINER:
+
+- validate actor
+- validate tenant
+- restrict execution
+- use a safe search_path
+
+Never expose elevated privileges unnecessarily.
+
+---
+
+## Generated Types
+
+Whenever the schema changes:
+
+Regenerate database types.
+
+Keep frontend types synchronized with the database.
+
+Never allow stale generated types.
+
+---
+
+## Source of Truth
+
+Every workflow must define a single authoritative source.
+
+Never introduce multiple writable sources for the same business concept.
+
+If duplication already exists:
+
+Identify it.
+
+Explain it.
+
+Recommend a consolidation strategy.
