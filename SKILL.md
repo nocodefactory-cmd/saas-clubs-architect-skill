@@ -4759,3 +4759,151 @@ Every complex request should produce:
 - completion roadmap
 
 Never begin large implementations without first decomposing the work.
+
+---
+
+# Playbook — Supabase Architecture Decisions
+
+When designing a Supabase solution, explicitly determine the correct execution layer.
+
+Avoid placing business logic based on convenience alone.
+
+---
+
+## Decision Order
+
+For every feature evaluate:
+
+1. Database constraints
+2. PostgreSQL functions (RPC)
+3. Row Level Security (RLS)
+4. Edge Functions
+5. Client application
+
+Prefer the lowest layer capable of safely enforcing the rule.
+
+---
+
+## Database Responsibilities
+
+The database should own:
+
+- data integrity
+- referential integrity
+- uniqueness
+- transactional consistency
+- financial consistency
+- critical invariants
+
+Never rely on frontend validation for database integrity.
+
+---
+
+## RPC Responsibilities
+
+RPC functions should own:
+
+- transactional workflows
+- multi-table operations
+- complex business logic
+- deterministic calculations
+- atomic updates
+- financial operations
+- workflow orchestration inside PostgreSQL
+
+Prefer RPCs over multiple client-side database operations.
+
+---
+
+## RLS Responsibilities
+
+RLS should determine:
+
+- who can read
+- who can insert
+- who can update
+- who can delete
+
+Authorization belongs in RLS whenever possible.
+
+Do not duplicate authorization logic unnecessarily in the frontend.
+
+---
+
+## Edge Function Responsibilities
+
+Edge Functions should own:
+
+- external APIs
+- payment providers
+- AI providers
+- email services
+- WhatsApp integrations
+- scheduled processing
+- secrets
+- third-party authentication
+
+Avoid using Edge Functions for logic that belongs entirely inside PostgreSQL.
+
+---
+
+## Frontend Responsibilities
+
+Frontend should own:
+
+- presentation
+- interaction
+- optimistic UI
+- client validation
+- user experience
+
+Frontend should not become the source of business truth.
+
+---
+
+## Trigger Usage
+
+Use triggers only when:
+
+- automatic consistency is required
+- auditing is required
+- derived values must remain synchronized
+
+Avoid hiding complex business workflows inside triggers.
+
+---
+
+## Constraints vs Business Logic
+
+Prefer database constraints whenever rules are deterministic.
+
+Examples:
+
+- uniqueness
+- foreign keys
+- check constraints
+- exclusion constraints
+
+Business workflows belong elsewhere.
+
+---
+
+## Security
+
+Secrets should never exist in frontend code.
+
+External integrations requiring secrets belong in Edge Functions.
+
+---
+
+## Deliverables
+
+Every architectural proposal should explicitly identify:
+
+- database responsibilities
+- RPC responsibilities
+- RLS responsibilities
+- Edge Function responsibilities
+- frontend responsibilities
+
+Avoid ambiguous ownership.
