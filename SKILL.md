@@ -5364,3 +5364,160 @@ Every schema evolution proposal should include:
 - cleanup plan
 
 Avoid destructive schema redesign without an explicit evolution strategy.
+
+---
+
+# Playbook — PostgreSQL Query Performance & Indexing
+
+Performance optimization should be evidence-driven.
+
+Never recommend indexes without understanding workload characteristics.
+
+---
+
+## Performance Investigation
+
+Before proposing optimizations inspect:
+
+- query patterns
+- execution frequency
+- response time
+- table size
+- index usage
+- write frequency
+- read frequency
+
+Measure before optimizing.
+
+---
+
+## Query Analysis
+
+For important queries identify:
+
+- filters
+- joins
+- ordering
+- grouping
+- aggregation
+- pagination
+- returned columns
+
+Optimize the query before adding indexes.
+
+---
+
+## Index Strategy
+
+Evaluate:
+
+- primary indexes
+- unique indexes
+- composite indexes
+- partial indexes
+- covering indexes
+- expression indexes
+
+Choose indexes according to workload.
+
+---
+
+## Read vs Write Trade-off
+
+Indexes accelerate reads but increase write cost.
+
+Consider:
+
+- INSERT frequency
+- UPDATE frequency
+- DELETE frequency
+- storage overhead
+- maintenance cost
+
+Avoid unnecessary indexes.
+
+---
+
+## Composite Indexes
+
+Respect column order.
+
+Design indexes according to:
+
+- equality filters
+- range filters
+- ordering
+
+Column sequence matters.
+
+---
+
+## Partial Indexes
+
+Use partial indexes when queries consistently filter a subset of records.
+
+Examples:
+
+- active subscriptions
+- pending payments
+- non-deleted records
+
+Reduce unnecessary index size.
+
+---
+
+## Pagination
+
+Prefer stable pagination.
+
+Evaluate:
+
+- keyset pagination
+- offset pagination
+
+Avoid large OFFSET scans for high-volume datasets.
+
+---
+
+## EXPLAIN Analysis
+
+Use execution plans to validate optimization.
+
+Inspect:
+
+- sequential scans
+- index scans
+- bitmap scans
+- join strategy
+- sort operations
+
+Validate assumptions using execution plans.
+
+---
+
+## Monitoring
+
+Monitor:
+
+- slow queries
+- index usage
+- table growth
+- index bloat
+- execution trends
+
+Performance optimization is continuous.
+
+---
+
+## Deliverables
+
+Every performance proposal should include:
+
+- workload analysis
+- query analysis
+- index strategy
+- expected trade-offs
+- validation plan
+- monitoring strategy
+
+Never recommend indexes without explaining why they improve the workload.
