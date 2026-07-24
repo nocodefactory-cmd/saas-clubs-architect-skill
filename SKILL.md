@@ -174,3 +174,163 @@ If information is missing:
 Ask for it.
 
 Never invent missing architecture.
+
+---
+
+# Mandatory Working Methodology
+
+For every non-trivial request, follow this sequence:
+
+## Phase 1 — Understand the request
+
+Identify:
+
+- the exact objective
+- the affected module
+- the expected behavior
+- the current failure or limitation
+- the protected behavior that must not change
+- whether the request is an audit, design, implementation, correction or refactor
+
+If the request is ambiguous:
+
+Do not guess.
+
+State the ambiguity clearly.
+
+Ask only for the information that cannot be obtained from the repository, database or existing project context.
+
+## Phase 2 — Inspect the current system
+
+Before proposing or implementing changes, inspect all relevant existing structures.
+
+Depending on the task, inspect:
+
+- routes
+- pages
+- components
+- hooks
+- services
+- context providers
+- state management
+- database tables
+- views
+- functions
+- RPCs
+- triggers
+- indexes
+- constraints
+- RLS policies
+- grants
+- migrations
+- generated types
+- edge functions
+- existing tests
+- related business workflows
+
+Never assume that an object does not exist because it was not found in only one file.
+
+Search the complete relevant scope.
+
+## Phase 3 — Establish the verified current state
+
+Separate findings into:
+
+### Verified facts
+
+Facts supported by repository, database or runtime evidence.
+
+### Hypotheses
+
+Possible explanations that still require verification.
+
+### Unknowns
+
+Information that cannot currently be confirmed.
+
+Never present hypotheses or unknowns as verified facts.
+
+## Phase 4 — Identify the root cause
+
+Distinguish:
+
+- symptom
+- immediate cause
+- architectural root cause
+- affected dependencies
+- collateral risks
+
+Do not fix only the visible symptom when the real cause remains active.
+
+## Phase 5 — Define the safest solution
+
+Before implementation, define:
+
+- recommended architecture
+- affected files
+- affected database objects
+- data migration requirements
+- permissions impact
+- backward compatibility
+- edge cases
+- concurrency risks
+- testing strategy
+- rollback or remediation path
+
+Prefer the smallest coherent solution that resolves the root cause.
+
+Do not mix unrelated corrections.
+
+## Phase 6 — Implement only the authorized scope
+
+Do not modify anything beyond the explicitly approved scope.
+
+Preserve:
+
+- existing working behavior
+- current routes
+- public contracts
+- data history
+- permissions
+- UI conventions
+- unrelated modules
+
+Do not redesign the application during a functional correction.
+
+Do not refactor unrelated files.
+
+## Phase 7 — Verify objectively
+
+After implementation, verify using relevant evidence:
+
+- build
+- type checking
+- linting
+- unit tests
+- integration tests
+- browser tests
+- SQL validation queries
+- RLS tests
+- concurrency tests
+- manual workflow verification
+
+Never state that a test passed unless it was actually executed.
+
+A successful build alone does not prove business correctness.
+
+## Phase 8 — Report clearly
+
+Always report:
+
+- what was inspected
+- what was found
+- what was changed
+- what was not changed
+- what was verified
+- what remains unverified
+- risks
+- next recommended step
+
+Do not hide uncertainty.
+
+Do not claim completion when relevant validation remains pending.
