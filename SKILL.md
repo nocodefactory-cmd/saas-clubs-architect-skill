@@ -2452,3 +2452,209 @@ Always optimize for the long-term evolution of the project.
 Architectural consistency has priority over implementation speed.
 
 Reducing future maintenance is more valuable than reducing a few lines of code today.
+
+---
+
+# SaaS Clubs Business Architecture
+
+The platform is a business operating system for sports clubs.
+
+Every architectural decision should preserve operational consistency across different sports and business models.
+
+---
+
+## Core Business Principles
+
+The platform is designed to support:
+
+- single clubs
+- multi-branch clubs
+- franchises
+- academies
+- sports schools
+- premium clubs
+- wellness centers
+
+Never assume a fixed organizational structure.
+
+---
+
+## Business Domains
+
+The business domains include:
+
+- members
+- dependents
+- guardians
+- coaches
+- employees
+- memberships
+- subscriptions
+- reservations
+- attendance
+- schedules
+- classes
+- facilities
+- payments
+- reports
+- communications
+
+These domains are independent but interconnected.
+
+---
+
+## Sports Independence
+
+Business rules should not depend on a specific sport.
+
+Swimming, padel, tennis, boxing, martial arts, gyms and future sports should reuse the same architecture whenever possible.
+
+Prefer configurable business rules over sport-specific implementations.
+
+---
+
+## Operational Consistency
+
+Every workflow should be predictable.
+
+Business operations should produce deterministic outcomes.
+
+Avoid hidden side effects.
+
+---
+
+## Member Lifecycle
+
+The platform should support the complete lifecycle:
+
+- prospect
+- lead
+- active member
+- paused member
+- inactive member
+- former member
+
+Do not assume every person becomes an active member.
+
+---
+
+## Membership Lifecycle
+
+Differentiate:
+
+- membership product
+- subscription
+- renewal
+- freeze
+- upgrade
+- downgrade
+- cancellation
+- expiration
+
+Historical information must always be preserved.
+
+---
+
+## Scheduling Model
+
+Separate:
+
+- recurring schedules
+- schedule templates
+- generated class instances
+- enrollments
+- reservations
+- attendance
+
+Never merge operational concepts simply because they are related.
+
+---
+
+## Facility Management
+
+Facilities are managed resources.
+
+Examples include:
+
+- pools
+- lanes
+- courts
+- studios
+- classrooms
+- boxing areas
+- gyms
+
+Facilities may belong to different branches.
+
+Availability should always be calculated from operational data rather than assumptions.
+
+---
+
+## Financial Model
+
+Financial entities include:
+
+- products
+- memberships
+- subscriptions
+- installments
+- payments
+- refunds
+- credits
+- discounts
+- invoices
+
+Financial history is immutable.
+
+Never overwrite historical financial events.
+
+---
+
+## Communication Model
+
+Communication channels are infrastructure.
+
+Business workflows should remain independent from:
+
+- email providers
+- WhatsApp providers
+- SMS gateways
+- push notification providers
+
+Changing providers must not require redesigning business logic.
+
+---
+
+## Reporting Philosophy
+
+Reports should always be generated from authoritative business data.
+
+Clearly identify:
+
+- reporting scope
+- reporting period
+- source of truth
+- applied filters
+
+Never calculate KPIs from inconsistent or duplicated sources.
+
+---
+
+## Future Evolution
+
+The architecture should support future modules without redesign.
+
+Examples:
+
+- tournaments
+- rankings
+- e-commerce
+- marketplace
+- CRM
+- AI assistants
+- marketing automation
+- loyalty programs
+- access control
+- biometric attendance
+
+Future growth should extend the architecture rather than replacing it.
