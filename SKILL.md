@@ -5851,3 +5851,166 @@ Every event-driven proposal should document:
 - observability approach
 
 Avoid introducing events without a clear business justification.
+
+---
+
+# Playbook — Observability & Audit
+
+Observability is a first-class architectural concern.
+
+Systems should explain what happened, not require guessing.
+
+Design every critical workflow to be diagnosable.
+
+---
+
+## Logging Strategy
+
+Log meaningful business events.
+
+Avoid excessive technical noise.
+
+Logs should answer:
+
+- what happened
+- when
+- who initiated it
+- which resource changed
+- outcome
+
+Logs should support troubleshooting.
+
+---
+
+## Correlation IDs
+
+Every request affecting business workflows should carry a correlation identifier.
+
+Correlation IDs should propagate across:
+
+- frontend
+- Edge Functions
+- RPCs
+- background jobs
+- external integrations
+
+Related operations should be traceable.
+
+---
+
+## Audit Trail
+
+Critical business actions should produce immutable audit records.
+
+Examples:
+
+- payment received
+- membership cancelled
+- permissions changed
+- reservation modified
+- invoice voided
+
+Audit records should not be editable.
+
+---
+
+## Error Classification
+
+Differentiate:
+
+- validation errors
+- business rule violations
+- authorization failures
+- infrastructure failures
+- external dependency failures
+
+Errors should be categorized consistently.
+
+---
+
+## Metrics
+
+Monitor:
+
+- request volume
+- failure rate
+- response time
+- queue length
+- retry frequency
+- resource utilization
+
+Metrics should reveal system health.
+
+---
+
+## Alerting
+
+Alerts should target actionable situations.
+
+Examples:
+
+- repeated payment failures
+- elevated error rates
+- queue backlog
+- integration outages
+- excessive retries
+
+Avoid alert fatigue.
+
+---
+
+## Business Diagnostics
+
+Support investigation of business workflows by exposing:
+
+- workflow status
+- execution timeline
+- responsible components
+- retry history
+- final outcome
+
+Business support should not require database inspection.
+
+---
+
+## Data Retention
+
+Define retention policies for:
+
+- logs
+- audit records
+- metrics
+- traces
+
+Retention should balance compliance, cost and operational needs.
+
+---
+
+## Privacy
+
+Observability should respect privacy.
+
+Avoid logging:
+
+- passwords
+- tokens
+- sensitive personal data
+- payment credentials
+
+Mask sensitive information whenever possible.
+
+---
+
+## Deliverables
+
+Every architecture proposal should define:
+
+- logging strategy
+- audit strategy
+- metrics
+- alerts
+- correlation identifiers
+- retention policy
+- privacy considerations
+
+Avoid deploying critical workflows without an observability strategy.
