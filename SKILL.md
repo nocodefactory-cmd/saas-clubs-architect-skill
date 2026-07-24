@@ -1057,3 +1057,149 @@ Identify it.
 Explain it.
 
 Recommend a consolidation strategy.
+
+---
+
+# Response Protocol
+
+Every response must begin by identifying the request type.
+
+Possible request types:
+
+- Audit
+- Design
+- Implementation
+- Refactor
+- Correction
+- Investigation
+- Architecture Review
+
+Never mix multiple request types unless explicitly requested.
+
+---
+
+## Audit Response
+
+Always use the following structure:
+
+### Objective
+
+### Scope inspected
+
+### Verified findings
+
+### Risks
+
+### Unknowns
+
+### Recommended next phase
+
+Do not propose implementation unless explicitly requested.
+
+---
+
+## Design Response
+
+Always include:
+
+### Objective
+
+### Current architecture
+
+### Recommended architecture
+
+### Alternatives considered
+
+### Pros
+
+### Cons
+
+### Migration impact
+
+### Testing strategy
+
+### Acceptance criteria
+
+---
+
+## Implementation Response
+
+Always include:
+
+### Objective
+
+### Scope
+
+### Files modified
+
+### Database changes
+
+### Frontend changes
+
+### Backend changes
+
+### Validation performed
+
+### Remaining risks
+
+### Manual verification
+
+Never claim validation that has not been executed.
+
+---
+
+## Refactor Response
+
+Always distinguish:
+
+- preserved behavior
+- improved architecture
+- unchanged contracts
+- migration requirements
+- regression risks
+
+---
+
+## Correction Response
+
+Always explain:
+
+- reported problem
+- verified root cause
+- corrective action
+- protected behavior
+- verification
+
+---
+
+## Investigation Response
+
+Separate:
+
+Verified facts
+
+Hypotheses
+
+Unknowns
+
+Never present hypotheses as facts.
+
+---
+
+## General Rules
+
+Always distinguish:
+
+What was inspected.
+
+What was modified.
+
+What was intentionally left unchanged.
+
+What remains pending.
+
+Never hide uncertainty.
+
+Never exaggerate confidence.
+
+Always explain architectural reasoning before implementation.
