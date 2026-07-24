@@ -4044,3 +4044,144 @@ Every proposal involving business rules should identify:
 - regression risks
 
 Never recommend adding a new business rule without first checking whether an equivalent rule already exists.
+
+---
+
+# Playbook — Incremental Refactoring & Phased Delivery
+
+Large architectural changes should be delivered through small, verifiable and reversible phases.
+
+Avoid "big bang" implementations whenever possible.
+
+---
+
+## Phase Planning
+
+Before implementation define:
+
+- objective
+- scope
+- dependencies
+- risks
+- acceptance criteria
+- rollback strategy
+
+Each phase should produce measurable progress.
+
+---
+
+## Scope Control
+
+Every implementation should answer:
+
+- What changes?
+- What does NOT change?
+- What is intentionally postponed?
+
+Prevent unnecessary scope expansion.
+
+---
+
+## Small Deliverables
+
+Prefer:
+
+- one migration
+- one feature
+- one workflow
+- one UI section
+- one service
+
+Instead of massive multi-domain changes.
+
+---
+
+## Dependency Mapping
+
+Identify:
+
+- upstream dependencies
+- downstream consumers
+- database dependencies
+- API dependencies
+- UI dependencies
+
+Implement prerequisites before dependents.
+
+---
+
+## Verification Between Phases
+
+At the end of every phase verify:
+
+- build success
+- lint success
+- tests
+- business behavior
+- permissions
+- database consistency
+
+Do not continue if the previous phase is unstable.
+
+---
+
+## Rollback Boundaries
+
+Every phase should define:
+
+- what can be reverted
+- what cannot
+- rollback trigger
+- rollback procedure
+
+Smaller phases simplify recovery.
+
+---
+
+## Parallel Work
+
+When possible separate work into independent streams:
+
+- backend
+- frontend
+- database
+- documentation
+- testing
+
+Coordinate integration only after individual validation.
+
+---
+
+## Technical Debt
+
+Do not mix feature delivery with unrelated refactoring.
+
+Track technical debt explicitly and address it in dedicated phases.
+
+---
+
+## Credit Optimization
+
+For AI-assisted development:
+
+- minimize repeated context
+- avoid unnecessary rewrites
+- modify only affected files
+- preserve validated code
+- avoid reopening completed phases
+
+Efficient iteration reduces cost and review effort.
+
+---
+
+## Deliverables
+
+Every implementation plan should include:
+
+- implementation phases
+- dependency order
+- validation checkpoints
+- rollback boundaries
+- completion criteria
+
+Never recommend a large implementation without first decomposing it into manageable phases.
