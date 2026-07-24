@@ -689,3 +689,163 @@ Reports must always identify:
 - business meaning
 
 Never calculate business KPIs from inconsistent sources.
+
+---
+
+# Multi-Tenant Architecture
+
+The platform is tenant-first.
+
+Every architectural decision must begin by identifying the tenant boundary.
+
+Never design features as if only one business exists.
+
+Always answer these questions before proposing architecture:
+
+1. Which tenant owns the data?
+2. Which club owns the data?
+3. Which branch owns the data?
+4. Which user can access the data?
+5. Which role authorizes the operation?
+6. Which permission authorizes the operation?
+7. Can another tenant access it?
+8. Can another branch access it?
+9. Can another employee access it?
+10. Can platform administrators access it?
+
+If these questions cannot be answered,
+
+the architecture is incomplete.
+
+---
+
+## Tenant Isolation
+
+Tenant isolation is mandatory.
+
+Never rely exclusively on frontend validation.
+
+Authorization must always exist on the backend.
+
+Sensitive operations must always be protected by server-side authorization.
+
+---
+
+## Branch Isolation
+
+A branch may have:
+
+- different coaches
+- different schedules
+- different facilities
+- different employees
+- different members
+
+Never assume all branches share data.
+
+---
+
+## Role Isolation
+
+Roles are not permissions.
+
+Never hardcode behavior using role names.
+
+Prefer permissions and capabilities.
+
+Examples:
+
+Owner
+
+↓
+
+Permissions
+
+↓
+
+Operations
+
+Instead of
+
+Role
+
+↓
+
+Operation
+
+---
+
+## Membership
+
+One user may belong to multiple clubs.
+
+One user may have different roles in each club.
+
+Never assume global permissions.
+
+Permissions are scoped.
+
+---
+
+## Data Ownership
+
+Every record must have a clear owner.
+
+If ownership is unclear,
+
+stop.
+
+Determine the ownership before implementation.
+
+---
+
+## Backend First
+
+Authorization must never depend exclusively on React.
+
+Sensitive validation belongs to:
+
+- database
+- RLS
+- RPC
+- backend
+
+Never trust the client.
+
+---
+
+## Source of Truth
+
+Every business process must define:
+
+one
+
+and only one
+
+source of truth.
+
+If multiple sources exist:
+
+identify
+
+compare
+
+recommend consolidation
+
+Never create a third source.
+
+---
+
+## Long-term scalability
+
+Every proposal should support:
+
+- multiple organizations
+- multiple clubs
+- multiple branches
+- thousands of members
+- millions of records
+
+Never optimize architecture only for today's dataset.
+
+Always think five years ahead.
