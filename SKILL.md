@@ -1203,3 +1203,185 @@ Never hide uncertainty.
 Never exaggerate confidence.
 
 Always explain architectural reasoning before implementation.
+
+---
+
+# Frontend Architecture Rules
+
+The frontend must remain predictable, modular and maintainable.
+
+Always separate presentation, state management, business logic and data access.
+
+Never concentrate all responsibilities inside one component.
+
+---
+
+## Component Design
+
+Components should have a single responsibility.
+
+Prefer small reusable components.
+
+Avoid components that exceed a reasonable complexity.
+
+Extract child components when responsibilities begin to diverge.
+
+Never duplicate UI components with equivalent behavior.
+
+---
+
+## Smart vs Presentational Components
+
+Differentiate clearly:
+
+Presentation Components
+
+- render UI
+- receive props
+- contain minimal logic
+
+Container Components
+
+- coordinate state
+- orchestrate workflows
+- communicate with services
+
+Business logic should not live inside presentation components.
+
+---
+
+## State Management
+
+Before creating state ask:
+
+- Is it local?
+- Is it shared?
+- Is it derived?
+- Is it temporary?
+- Is it persisted?
+
+Avoid duplicated state.
+
+Never store derived values when they can be computed.
+
+---
+
+## Hooks
+
+Prefer custom hooks for reusable behavior.
+
+Hooks should encapsulate:
+
+- business workflows
+- data loading
+- permissions
+- feature flags
+- reusable UI behavior
+
+Avoid creating hooks for one-time logic.
+
+---
+
+## Data Fetching
+
+Keep data fetching outside presentation components whenever practical.
+
+Handle:
+
+- loading
+- empty state
+- errors
+- retries
+
+Never assume requests always succeed.
+
+---
+
+## Routing
+
+Routes should represent business capabilities.
+
+Avoid deeply nested routing without justification.
+
+Protect routes through authorization, not only UI visibility.
+
+---
+
+## Forms
+
+Forms must support:
+
+- validation
+- loading
+- optimistic prevention of duplicate submissions
+- clear error messages
+- successful completion feedback
+
+Never silently ignore validation errors.
+
+---
+
+## UI Consistency
+
+Reuse existing:
+
+- layouts
+- spacing
+- typography
+- buttons
+- dialogs
+- tables
+- cards
+- navigation patterns
+
+Do not introduce new design patterns without justification.
+
+---
+
+## Performance
+
+Avoid unnecessary re-renders.
+
+Avoid passing unstable callbacks unnecessarily.
+
+Paginate or virtualize large datasets when appropriate.
+
+Do not optimize prematurely.
+
+Measure before optimizing.
+
+---
+
+## Accessibility
+
+Interfaces should support:
+
+- keyboard navigation
+- focus management
+- semantic HTML
+- accessible labels
+- sufficient contrast
+
+Accessibility is a default requirement.
+
+---
+
+## Error Handling
+
+Every user-facing error should:
+
+- explain the problem
+- suggest the next action
+- preserve entered information whenever possible
+
+Never expose internal implementation details.
+
+---
+
+## Feature Integration
+
+New features should integrate into the existing architecture.
+
+Prefer extending existing modules over introducing parallel workflows.
+
+Never bypass established application patterns.
