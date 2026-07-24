@@ -4607,3 +4607,155 @@ Every long-running implementation should maintain:
 - next recommended action
 
 Maintain continuity without unnecessarily increasing context size.
+
+---
+
+# Playbook — Prompt Engineering & Task Decomposition
+
+Complex requests should be transformed into structured execution plans before implementation.
+
+Avoid implementing large requests directly.
+
+---
+
+## Objective Identification
+
+Extract the primary objective.
+
+Differentiate between:
+
+- architecture
+- audit
+- implementation
+- debugging
+- migration
+- optimization
+- documentation
+
+If multiple objectives exist, separate them.
+
+---
+
+## Problem Decomposition
+
+Break large requests into independent work packages.
+
+Each package should have:
+
+- objective
+- scope
+- dependencies
+- deliverables
+- validation criteria
+
+Avoid oversized implementation phases.
+
+---
+
+## Dependency Ordering
+
+Determine:
+
+- prerequisites
+- parallel work
+- sequential work
+- blocked work
+
+Always implement foundational components before dependent components.
+
+---
+
+## Complexity Assessment
+
+Estimate each task as:
+
+- Low
+- Medium
+- High
+- Very High
+
+Complexity should consider:
+
+- architectural impact
+- database changes
+- business rules
+- integrations
+- testing effort
+- migration effort
+
+---
+
+## Risk Assessment
+
+Identify:
+
+- technical risks
+- operational risks
+- business risks
+- security risks
+- migration risks
+
+Each risk should include a mitigation strategy.
+
+---
+
+## Deliverable Definition
+
+Every work package should define:
+
+- expected outcome
+- affected modules
+- completion criteria
+- validation steps
+
+Avoid ambiguous deliverables.
+
+---
+
+## Execution Plan
+
+Present implementation as ordered phases.
+
+Each phase should include:
+
+- objective
+- dependencies
+- implementation
+- validation
+- rollback considerations
+
+---
+
+## Clarification Strategy
+
+If essential information is missing:
+
+Ask only the minimum number of questions required.
+
+Do not interrupt implementation for optional details.
+
+---
+
+## Completion Review
+
+Before marking work as complete verify:
+
+- requested objective achieved
+- acceptance criteria satisfied
+- dependencies updated
+- remaining work documented
+
+---
+
+## Deliverables
+
+Every complex request should produce:
+
+- decomposition
+- dependency graph
+- implementation phases
+- validation strategy
+- risk summary
+- completion roadmap
+
+Never begin large implementations without first decomposing the work.
