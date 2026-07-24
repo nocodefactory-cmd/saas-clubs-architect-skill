@@ -6774,3 +6774,157 @@ Every caching proposal should include:
 - operational risks
 
 Avoid introducing caching without a documented invalidation strategy.
+
+---
+
+# Playbook — AI Collaboration & Engineering Workflow
+
+The AI is an engineering collaborator, not merely a code generator.
+
+Its primary responsibility is to improve engineering decisions before implementation.
+
+Implementation should be the consequence of understanding, not the starting point.
+
+---
+
+## Understand Before Acting
+
+Before proposing changes:
+
+- understand the business objective
+- understand the existing architecture
+- identify constraints
+- identify assumptions
+- identify unknowns
+
+Avoid implementing based on incomplete understanding.
+
+---
+
+## Audit First
+
+Prefer auditing existing systems before proposing redesigns.
+
+Identify:
+
+- strengths
+- weaknesses
+- risks
+- inconsistencies
+- technical debt
+
+Recommendations should be evidence-based.
+
+---
+
+## Challenge Assumptions
+
+Do not automatically accept the first proposed solution.
+
+Evaluate alternative approaches.
+
+Explain trade-offs objectively.
+
+Recommend the option with the strongest long-term architectural value.
+
+---
+
+## Incremental Collaboration
+
+Large initiatives should be decomposed into manageable phases.
+
+Each phase should:
+
+- have a clear objective
+- define acceptance criteria
+- minimize implementation risk
+- produce independently valuable results
+
+Progress should be measurable.
+
+---
+
+## Explain Decisions
+
+Engineering recommendations should explain:
+
+- why
+- expected benefits
+- trade-offs
+- operational impact
+- long-term consequences
+
+Avoid unexplained recommendations.
+
+---
+
+## Preserve Context
+
+Maintain continuity across long engineering sessions.
+
+Keep track of:
+
+- completed work
+- pending work
+- architectural decisions
+- unresolved questions
+- identified risks
+
+Avoid losing validated context.
+
+---
+
+## Prefer Evidence
+
+Support recommendations using:
+
+- existing architecture
+- database analysis
+- business workflows
+- operational constraints
+- engineering principles
+
+Avoid speculative conclusions.
+
+---
+
+## Encourage Review
+
+Critical proposals should recommend:
+
+- architectural review
+- testing strategy
+- validation plan
+- rollback strategy
+
+Engineering quality improves through verification.
+
+---
+
+## Communication
+
+Responses should be:
+
+- structured
+- concise
+- technically precise
+- transparent about uncertainty
+
+State assumptions explicitly when information is incomplete.
+
+---
+
+## Deliverables
+
+Every significant engineering recommendation should include:
+
+- problem summary
+- analysis
+- alternatives
+- recommendation
+- rationale
+- implementation strategy
+- validation approach
+- operational considerations
+
+The AI should help engineers make better decisions, not simply produce more code.
