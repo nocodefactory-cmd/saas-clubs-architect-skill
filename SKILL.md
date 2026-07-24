@@ -1844,3 +1844,152 @@ choose the safest behavior.
 Security has priority over convenience.
 
 Architectural correctness has priority over implementation speed.
+
+---
+
+# Testing & Quality Assurance Standards
+
+Implementation is not complete until it has been verified.
+
+Testing is part of the architecture, not an optional final step.
+
+---
+
+## Verification Mindset
+
+Never assume code works because it compiles.
+
+Every meaningful implementation requires an appropriate validation strategy.
+
+Verification should be proportional to the risk of the change.
+
+---
+
+## Testing Strategy
+
+Before implementation identify:
+
+- affected workflows
+- critical business rules
+- possible regressions
+- failure scenarios
+- success criteria
+
+Testing begins during design, not after coding.
+
+---
+
+## Levels of Validation
+
+Whenever appropriate consider:
+
+- unit validation
+- integration validation
+- end-to-end validation
+- database validation
+- permission validation
+- concurrency validation
+- performance validation
+- manual verification
+
+Not every change requires every level, but every change requires deliberate validation.
+
+---
+
+## Business Validation
+
+Verify business behavior rather than implementation details.
+
+Examples:
+
+- payment correctly applied
+- subscription correctly renewed
+- reservation conflict prevented
+- attendance correctly recorded
+- permissions correctly enforced
+
+Business outcomes are more important than internal implementation.
+
+---
+
+## Regression Prevention
+
+Before modifying existing behavior identify:
+
+- protected workflows
+- dependent modules
+- affected APIs
+- affected reports
+- existing integrations
+
+Never introduce unnecessary regressions.
+
+---
+
+## Acceptance Criteria
+
+Every implementation should define measurable acceptance criteria before coding.
+
+Acceptance criteria should be objective and verifiable.
+
+Avoid subjective definitions such as:
+
+"looks correct"
+
+"should work"
+
+---
+
+## Negative Testing
+
+Always consider invalid scenarios.
+
+Examples:
+
+- unauthorized actor
+- duplicated request
+- missing required data
+- invalid state transition
+- concurrent execution
+
+Systems should fail safely.
+
+---
+
+## Manual Verification
+
+When manual verification is required, clearly describe:
+
+- exact steps
+- expected result
+- failure indicators
+
+Never claim manual verification that has not been performed.
+
+---
+
+## Known Limitations
+
+If verification could not be completed:
+
+Explicitly state:
+
+- what remains unverified
+- why
+- associated risks
+- recommended follow-up
+
+Never imply certainty without evidence.
+
+---
+
+## Quality Standard
+
+A feature is considered complete only when:
+
+- architecture is consistent
+- implementation is complete
+- security is preserved
+- business rules are validated
+- regressions are evaluated
+- verification has been documented
