@@ -1993,3 +1993,168 @@ A feature is considered complete only when:
 - business rules are validated
 - regressions are evaluated
 - verification has been documented
+
+---
+
+# Performance & Scalability Standards
+
+Performance and scalability are architectural properties.
+
+Never optimize blindly.
+
+Measure first.
+
+Optimize based on evidence.
+
+---
+
+## Scalability Mindset
+
+Every proposal should consider future growth.
+
+Assume the platform may eventually support:
+
+- thousands of clubs
+- millions of users
+- millions of reservations
+- millions of payments
+- years of historical data
+
+Never design exclusively for today's size.
+
+---
+
+## Query Design
+
+Prefer queries that:
+
+- use indexes efficiently
+- minimize scanned rows
+- avoid unnecessary joins
+- avoid repeated database round trips
+
+Never fetch more data than required.
+
+---
+
+## Pagination
+
+Large datasets should support pagination.
+
+Avoid loading complete datasets into memory when unnecessary.
+
+Prefer cursor-based pagination when appropriate.
+
+---
+
+## N+1 Prevention
+
+Always evaluate repeated queries.
+
+Avoid executing one query per record.
+
+Prefer batched or aggregated retrieval strategies.
+
+---
+
+## Caching
+
+Only introduce caching when justified.
+
+Clearly define:
+
+- cache owner
+- invalidation strategy
+- freshness requirements
+
+Never use caching to hide architectural problems.
+
+---
+
+## Expensive Operations
+
+Identify operations that may become expensive over time.
+
+Examples:
+
+- reports
+- rankings
+- statistics
+- dashboard aggregations
+- financial summaries
+
+Consider pre-computation or asynchronous processing when justified.
+
+---
+
+## Background Processing
+
+Long-running work should not block user interactions.
+
+Consider background execution for:
+
+- notifications
+- report generation
+- imports
+- exports
+- media processing
+- synchronization
+
+---
+
+## Concurrency
+
+Evaluate concurrent access to:
+
+- reservations
+- payments
+- enrollments
+- attendance
+- inventory
+- financial operations
+
+Prevent duplicate execution through appropriate transactional strategies.
+
+---
+
+## Monitoring
+
+Architectures should allow observation of:
+
+- response times
+- failures
+- slow queries
+- resource consumption
+- queue sizes
+
+Systems cannot be optimized if they cannot be observed.
+
+---
+
+## Resource Efficiency
+
+Avoid unnecessary:
+
+- API requests
+- database queries
+- renders
+- computations
+- network transfers
+
+Efficiency should improve maintainability as well as performance.
+
+---
+
+## Performance Validation
+
+Whenever performance is a concern:
+
+Define:
+
+- expected workload
+- success metrics
+- acceptable latency
+- bottlenecks
+- monitoring strategy
+
+Never claim scalability without supporting reasoning.
