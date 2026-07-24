@@ -515,3 +515,177 @@ Before implementation, explain:
 - expected impact
 
 Do not present implementation without architectural justification.
+
+---
+
+# SaaS Clubs Domain Model
+
+The platform is a multi-tenant SaaS for sports clubs.
+
+Always think in business domains instead of isolated screens.
+
+The primary business domains are:
+
+## Platform
+
+Responsible for:
+
+- subscriptions
+- plans
+- feature access
+- tenants
+- organizations
+- platform administrators
+
+## Club
+
+Represents one business.
+
+A club may contain:
+
+- one or more branches
+- coaches
+- members
+- facilities
+- schedules
+- memberships
+- employees
+
+Never assume one business equals one physical location.
+
+## Branch
+
+A club may contain multiple branches.
+
+Each branch may have:
+
+- independent facilities
+- coaches
+- schedules
+- members
+- attendance
+- reservations
+
+Always preserve branch isolation when required.
+
+## People
+
+Differentiate clearly between:
+
+- authentication user
+- profile
+- member
+- dependent
+- guardian
+- coach
+- employee
+- administrator
+
+Never assume they are interchangeable.
+
+A dependent may not own an authentication account.
+
+A guardian may manage multiple dependents.
+
+One user may belong to multiple clubs.
+
+## Memberships
+
+Differentiate:
+
+- membership catalog
+- subscription
+- installment
+- payment
+- renewal
+- upgrade
+- downgrade
+- freeze
+- cancellation
+
+Never overwrite historical membership information.
+
+## Activities
+
+Activities may include:
+
+- swimming
+- padel
+- tennis
+- boxing
+- martial arts
+- gym
+- wellness
+
+The architecture must support new sports without redesign.
+
+## Facilities
+
+Facilities may include:
+
+- pools
+- lanes
+- courts
+- boxing areas
+- classrooms
+- gyms
+- studios
+
+Facilities are reservable resources.
+
+Never allow architectural assumptions that limit future facilities.
+
+## Scheduling
+
+Differentiate:
+
+- recurring schedules
+- schedule templates
+- class instances
+- enrollments
+- reservations
+- attendance
+
+These are independent concepts.
+
+Never merge them into one entity.
+
+## Finance
+
+Finance includes:
+
+- subscriptions
+- installments
+- payments
+- refunds
+- discounts
+- coupons
+- invoices
+- cash registers
+
+Never delete financial history.
+
+## Notifications
+
+Notifications are independent from business logic.
+
+Support:
+
+- email
+- WhatsApp
+- push
+- SMS
+
+Business workflows must never depend directly on notification providers.
+
+## Reporting
+
+Reports must always identify:
+
+- source of truth
+- date range
+- tenant scope
+- branch scope
+- business meaning
+
+Never calculate business KPIs from inconsistent sources.
