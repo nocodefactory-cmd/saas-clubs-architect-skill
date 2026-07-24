@@ -334,3 +334,184 @@ Always report:
 Do not hide uncertainty.
 
 Do not claim completion when relevant validation remains pending.
+
+---
+
+# Lovable Behavior Rules
+
+These rules are mandatory.
+
+They override any tendency to immediately generate code.
+
+## General behavior
+
+Always think before acting.
+
+Always inspect before modifying.
+
+Always understand before implementing.
+
+Never assume.
+
+Never guess.
+
+Never improvise architecture.
+
+Never optimize only for speed.
+
+## Investigation first
+
+Whenever a request affects an existing feature:
+
+Inspect the current implementation before proposing changes.
+
+Search for:
+
+- existing components
+- existing hooks
+- existing services
+- existing utilities
+- existing database objects
+- existing RPCs
+- existing business rules
+
+Never create duplicates simply because they were not found in the first inspected file.
+
+## No hidden modifications
+
+Do not modify unrelated files.
+
+Do not rename files without authorization.
+
+Do not reorganize folders unless explicitly requested.
+
+Do not improve unrelated code during another task.
+
+Do not perform hidden refactors.
+
+## Respect project conventions
+
+Reuse existing:
+
+- naming conventions
+- folder structure
+- UI patterns
+- state management
+- validation strategy
+- architectural patterns
+
+If a convention appears inconsistent:
+
+Report it.
+
+Do not silently replace it.
+
+## Protect existing behavior
+
+When implementing new functionality:
+
+Preserve all unrelated behavior.
+
+Avoid regressions.
+
+Avoid changing public APIs.
+
+Avoid changing database semantics.
+
+Avoid changing UI interactions unless required.
+
+## Minimize implementation scope
+
+Always implement the smallest complete solution.
+
+Do not implement future features.
+
+Do not solve problems that were not requested.
+
+Avoid speculative abstractions.
+
+## Avoid duplicated logic
+
+Before creating:
+
+- table
+- hook
+- component
+- utility
+- RPC
+- service
+- context
+- helper
+
+Verify whether an equivalent already exists.
+
+Prefer extension over duplication.
+
+## Work in phases
+
+Large requests must always be divided into:
+
+Phase 1
+
+Investigation
+
+Phase 2
+
+Architecture
+
+Phase 3
+
+Implementation
+
+Phase 4
+
+Verification
+
+Phase 5
+
+Next implementation block
+
+Never attempt large implementations in a single step.
+
+## Reduce Lovable credit consumption
+
+Prefer fewer, higher-quality modifications.
+
+Avoid repeated trial-and-error iterations.
+
+Avoid rewriting entire modules for small corrections.
+
+Reuse existing structures whenever possible.
+
+Perform one coherent implementation block before requesting another.
+
+## Never during an audit
+
+When operating in Audit Mode:
+
+Never:
+
+- modify code
+- modify SQL
+- generate migrations
+- create components
+- rewrite files
+- redesign UI
+
+Only inspect.
+
+Only report evidence.
+
+Only classify findings.
+
+## Always explain reasoning
+
+Before implementation, explain:
+
+- why the solution is recommended
+- why alternatives were rejected
+- affected scope
+- implementation risks
+- expected impact
+
+Do not present implementation without architectural justification.
