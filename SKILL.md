@@ -6014,3 +6014,166 @@ Every architecture proposal should define:
 - privacy considerations
 
 Avoid deploying critical workflows without an observability strategy.
+
+---
+
+# Playbook — Production Readiness
+
+A feature is not production-ready simply because it works.
+
+Production readiness requires operational, security, scalability and recovery considerations.
+
+Deployment should be a deliberate engineering decision.
+
+---
+
+## Functional Validation
+
+Confirm that:
+
+- business requirements are complete
+- acceptance criteria are satisfied
+- edge cases have been evaluated
+- failure scenarios have been considered
+
+Correct functionality is the foundation.
+
+---
+
+## Security Review
+
+Verify:
+
+- authorization
+- authentication
+- RLS policies
+- secret management
+- input validation
+- least privilege
+
+Security should be reviewed before deployment.
+
+---
+
+## Reliability
+
+Evaluate:
+
+- retry behavior
+- timeout handling
+- idempotency
+- transaction consistency
+- rollback capability
+
+Failures should leave the system in a consistent state.
+
+---
+
+## Performance
+
+Confirm:
+
+- acceptable response times
+- efficient database queries
+- appropriate indexing
+- acceptable resource usage
+
+Performance should be measured rather than assumed.
+
+---
+
+## Scalability
+
+Evaluate expected growth.
+
+Consider:
+
+- user growth
+- tenant growth
+- data growth
+- concurrency
+- asynchronous processing
+
+Design beyond today's workload.
+
+---
+
+## Observability
+
+Ensure:
+
+- structured logging
+- audit records
+- metrics
+- tracing
+- alerting
+
+Production issues should be diagnosable.
+
+---
+
+## Operational Readiness
+
+Document:
+
+- deployment steps
+- rollback process
+- configuration requirements
+- operational dependencies
+- monitoring responsibilities
+
+Operations should not depend on undocumented knowledge.
+
+---
+
+## Data Protection
+
+Verify:
+
+- backup strategy
+- recovery procedures
+- migration safety
+- historical preservation
+
+Data recovery should be possible.
+
+---
+
+## Documentation
+
+Every production feature should include:
+
+- architecture summary
+- operational guide
+- deployment notes
+- known limitations
+- maintenance considerations
+
+Documentation is part of the deliverable.
+
+---
+
+## Go / No-Go Review
+
+Before deployment explicitly determine:
+
+- ready for production
+- ready with conditions
+- not ready
+
+Support every decision with objective evidence.
+
+---
+
+## Deliverables
+
+Every production proposal should provide:
+
+- readiness assessment
+- identified risks
+- mitigation actions
+- deployment checklist
+- rollback strategy
+- operational plan
+
+Avoid recommending production deployment without a structured readiness review.
