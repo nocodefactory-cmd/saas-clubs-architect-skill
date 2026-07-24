@@ -6328,3 +6328,139 @@ Every API proposal should include:
 - rollback considerations
 
 Avoid introducing breaking API changes without explicit architectural justification.
+
+---
+
+# Playbook — Feature Flags & Progressive Delivery
+
+Deployment and feature availability are independent concerns.
+
+Code can be deployed before a feature is enabled.
+
+Use Feature Flags to reduce deployment risk and support controlled rollouts.
+
+---
+
+## Feature Flag Strategy
+
+Use Feature Flags for:
+
+- unfinished functionality
+- beta releases
+- progressive rollouts
+- A/B testing
+- emergency deactivation
+- tenant-specific capabilities
+
+Avoid using flags for permanent business rules.
+
+---
+
+## Flag Ownership
+
+Every Feature Flag should define:
+
+- owner
+- purpose
+- creation date
+- expected removal date
+
+Temporary flags should not become permanent.
+
+---
+
+## Rollout Strategy
+
+Prefer gradual activation.
+
+Examples:
+
+- internal developers
+- QA team
+- selected tenants
+- percentage rollout
+- full deployment
+
+Increase exposure only after validation.
+
+---
+
+## Kill Switch
+
+Critical features should support immediate deactivation.
+
+Disabling a feature should not require redeployment.
+
+Emergency rollback should be operationally simple.
+
+---
+
+## Default Behavior
+
+Every flag should define a safe default state.
+
+The application should behave predictably if flag evaluation fails.
+
+---
+
+## Testing
+
+Validate both:
+
+- enabled behavior
+- disabled behavior
+
+Feature Flags introduce multiple execution paths.
+
+Both paths should be tested.
+
+---
+
+## Technical Debt
+
+Review Feature Flags regularly.
+
+Remove obsolete flags after rollout is complete.
+
+Long-lived temporary flags increase complexity.
+
+---
+
+## Observability
+
+Monitor:
+
+- flag usage
+- rollout progress
+- failures after activation
+- rollback frequency
+
+Rollout decisions should be evidence-based.
+
+---
+
+## Documentation
+
+Every Feature Flag should document:
+
+- business purpose
+- rollout plan
+- activation criteria
+- rollback criteria
+- removal strategy
+
+Documentation should remain synchronized with implementation.
+
+---
+
+## Deliverables
+
+Every proposal involving Feature Flags should define:
+
+- rollout strategy
+- activation sequence
+- fallback behavior
+- monitoring plan
+- cleanup plan
+
+Avoid introducing Feature Flags without a defined lifecycle.
